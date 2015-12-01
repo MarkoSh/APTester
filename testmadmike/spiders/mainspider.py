@@ -10,7 +10,7 @@ class MainspiderSpider(CrawlSpider):
     start_urls = (
         'http://api-dot-bizzbook-app.appspot.com/v2/dashboard/stats',
     )
-    handle_httpstatus_list = [404, 500]
+    handle_httpstatus_list = [404, 405, 500]
     paths = [path.strip() for path in open('paths.txt', 'r').readlines() if 'cron' not in path]
 
     def parse(self, response):
@@ -58,7 +58,7 @@ class logger():
     def error(self, msg='Error'):
         line = 'ERROR: {} - {}'.format(datetime.now().strftime(self.timeformat), msg)
         print >> sys.stderr, colors.red(line)
-        self.write('log', line)
+        self.write('error', line)
 
     def write(self, type, line):
         open('{}.log'.format(type), 'a').write('{}\n'.format(line))
