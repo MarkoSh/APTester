@@ -12,5 +12,4 @@ class MainspiderSpider(CrawlSpider):
     )
 
     def parse(self, response):
-
         pass
