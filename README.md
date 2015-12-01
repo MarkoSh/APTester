@@ -16,6 +16,6 @@ scrapy crawl mainspider
 
 Отчеты
 -
-0. SUCCESS_dd-mm-yyy_log.txt
-0. ERRORS_dd-mm-yyy_log.txt
-0. LOGGER_dd-mm-yyy_log.txt
+0. SUCCESS_dd-mm-yyyy_log.txt
+0. ERRORS_dd-mm-yyyy_log.txt
+0. LOGGER_dd-mm-yyyy_log.txt
