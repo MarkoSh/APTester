@@ -6,9 +6,9 @@ from scrapy.http import Request
 
 class MainspiderSpider(CrawlSpider):
     name = "mainspider"
-    allowed_domains = ["appointmentpro.net"]
+    allowed_domains = ["appointmentpro.com"]
     start_urls = (
-        'http://appointmentpro.net/',
+        'http://appointmentpro.com/',
     )
 
     def parse(self, response):
