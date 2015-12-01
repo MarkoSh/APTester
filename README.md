@@ -9,3 +9,7 @@
 Запуск
 =
 scrapy crawl mainspider
+
+Настройки
+=
+Настройки хранятся в файле testmadmike/settings.py
