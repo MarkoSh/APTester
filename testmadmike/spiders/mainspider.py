@@ -20,21 +20,9 @@ class MainspiderSpider(CrawlSpider):
         log = logger()
         log.info('Url {} available, status is {} - correct'.format(response.url, response.status))
         for path in self.paths:
-            if path['func'] == 'checkStatus':
-                if not path['skip']:
-                    yield Request(url='{}{}'.format(self.host, path['path']), meta={
-                        'path': path
-                    }, callback=self.checkStatus)
-                else:
-                    for path_ in path['subs']:
-                        path_['path'] = path['path'] + path_['path']
-                        yield Request(url='{}{}'.format(self.host, path_['path']), meta={
-                        'path': path_
-                    }, callback=self.checkStatus)
+            self.startTesting(path)
 
-    def checkStatus(self, response):
-        # assert response.status == 200
-        path = response.meta['path']
+    def startTesting(self, path):
         pass
 
 

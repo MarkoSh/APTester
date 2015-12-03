@@ -2,41 +2,308 @@
   {
     "path": "/v2",
     "method": null,
-    "status": "success",
-    "response": 200,
-    "func": "checkStatus",
+    "status": null,
+    "response": 404,
+    "func": null,
     "skip": 1,
     "param": null,
-    "subs": [
-      {
-        "path": "/appointments",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": null,
-        "param": null
-      },
-      {
-        "path": "/business",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": 1,
-        "param": null,
-        "subs": [
-          {
-            "path": "/<business_id:\\d+>",
-            "method": null,
-            "status": "success",
-            "response": 200,
+    "subs": {
+      "func": "checkStatus",
+      "items": [
+        {
+          "path": "/appointments",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": null,
+          "param": null
+        },
+        {
+          "path": "/business",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null,
-            "subs": [
+            "items": [
               {
-                "path": "/<business_id:\\d+>/appointments",
+                "path": "/<business_id:\\d+>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null,
+                "subs": [
+                  {
+                    "path": "/<business_id:\\d+>/appointments",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/billing",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/billing/payment_method",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/billing/payment_method/<payment_method_id>",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/billing/stats",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/clone",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/contacts",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/contacts/<contact_id>",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/contacts/groups",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/contacts/groups/<group_id:\\d+>",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/contacts/multi",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/hours",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/marketing/<marketing_id:\\d+>",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/marketing/<marketing_id:\\d+>/stats",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/owner",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/sales",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/sales/logs",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/service/<service_id:\\d+>",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/service/<service_id:\\d+>/disable",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/service/<service_id:\\d+>/enable",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/staff",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>/disable",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>/enable",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/staff/delegated",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/template/<template_id:\\d+>",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/template/test/user/<user_id:\\d+>",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/templates",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  },
+                  {
+                    "path": "/<business_id:\\d+>/templates/notifications/customers/settings",
+                    "method": null,
+                    "status": "success",
+                    "response": 200,
+                    "func": null,
+                    "skip": null,
+                    "param": null
+                  }
+                ]
+              },
+              {
+                "path": "/reviews",
                 "method": null,
                 "status": "success",
                 "response": 200,
@@ -45,7 +312,7 @@
                 "param": null
               },
               {
-                "path": "/<business_id:\\d+>/billing",
+                "path": "/search",
                 "method": null,
                 "status": "success",
                 "response": 200,
@@ -54,7 +321,7 @@
                 "param": null
               },
               {
-                "path": "/<business_id:\\d+>/billing/payment_method",
+                "path": "/service",
                 "method": null,
                 "status": "success",
                 "response": 200,
@@ -63,7 +330,7 @@
                 "param": null
               },
               {
-                "path": "/<business_id:\\d+>/billing/payment_method/<payment_method_id>",
+                "path": "/service/staff",
                 "method": null,
                 "status": "success",
                 "response": 200,
@@ -72,7 +339,7 @@
                 "param": null
               },
               {
-                "path": "/<business_id:\\d+>/billing/stats",
+                "path": "/services",
                 "method": null,
                 "status": "success",
                 "response": 200,
@@ -81,7 +348,7 @@
                 "param": null
               },
               {
-                "path": "/<business_id:\\d+>/clone",
+                "path": "/staff",
                 "method": null,
                 "status": "success",
                 "response": 200,
@@ -90,205 +357,7 @@
                 "param": null
               },
               {
-                "path": "/<business_id:\\d+>/contacts",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/contacts/<contact_id>",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/contacts/groups",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/contacts/groups/<group_id:\\d+>",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/contacts/multi",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/hours",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/marketing/<marketing_id:\\d+>",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/marketing/<marketing_id:\\d+>/stats",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/owner",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/sales",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/sales/logs",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/service/<service_id:\\d+>",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/service/<service_id:\\d+>/disable",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/service/<service_id:\\d+>/enable",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/staff",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>/disable",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>/enable",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/staff/delegated",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/template/<template_id:\\d+>",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/template/test/user/<user_id:\\d+>",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/templates",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": null,
-                "param": null
-              },
-              {
-                "path": "/<business_id:\\d+>/templates/notifications/customers/settings",
+                "path": "/staff/availability",
                 "method": null,
                 "status": "success",
                 "response": 200,
@@ -297,844 +366,805 @@
                 "param": null
               }
             ]
-          },
-          {
-            "path": "/reviews",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/search",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/service",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/service/staff",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/services",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/staff",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/staff/availability",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
           }
-        ]
-      },
-      {
-        "path": "/businesses",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": null,
-        "param": null,
-        "subs": [
-          {
-            "path": "/external",
-            "method": null,
-            "status": "success",
-            "response": 200,
+        },
+        {
+          "path": "/businesses",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": null,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/external/info/<id>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/external/search",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
+            "items": [
+              {
+                "path": "/external",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/external/info/<id>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/external/search",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
           }
-        ]
-      },
-      {
-        "path": "/cron",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": 1,
-        "param": null,
-        "subs": [
-          {
-            "path": "/<cron_type>/<time_unit>",
-            "method": null,
-            "status": "success",
-            "response": 200,
+        },
+        {
+          "path": "/cron",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/<time_unit>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/billing/calculate",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/counter",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/counter/last_access",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/trials",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
+            "items": [
+              {
+                "path": "/<cron_type>/<time_unit>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<time_unit>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/billing/calculate",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/counter",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/counter/last_access",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/trials",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
           }
-        ]
-      },
-      {
-        "path": "/dashboard/stats",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": null,
-        "param": null
-      },
-      {
-        "path": "/event",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": 1,
-        "param": null,
-        "subs": [
-          {
-            "path": "/appointment",
-            "method": null,
-            "status": "success",
-            "response": 200,
+        },
+        {
+          "path": "/dashboard/stats",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": null,
+          "param": null
+        },
+        {
+          "path": "/event",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/generic",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/generic/delete",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/generic/update",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
+            "items": [
+              {
+                "path": "/appointment",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/generic",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/generic/delete",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/generic/update",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
           }
-        ]
-      },
-      {
-        "path": "/external",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": 1,
-        "param": null,
-        "subs": [
-          {
-            "path": "/charge",
-            "method": null,
-            "status": "success",
-            "response": 200,
+        },
+        {
+          "path": "/external",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/charge/all",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/coupon",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/coupon/all",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/events",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/events/all",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/events/customer/subscription",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/events/invoice",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/analytics",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/analytics/query",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/calendarList",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/calendarList/list",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/events",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/events/delete",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/events/list",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/events/patch",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/events/watch",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/freeBusy",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/google/calendar/freeBusy/query",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/outlook",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/outlook/webdav/",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/outlook/webdav/<calendar_id>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/outlook/webdav/b/<business_id:\\d+>/u/<user_id:\\d+>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/plan",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/plan/all",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/sendgrid",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/sendgrid/webhooks",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/sendgrid/webhooks/event",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/sendgrid/webhooks/inbound",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe/customer",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe/customer/<customer_id>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe/customer/<customer_id>/subscriptions",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe/customer/<customer_id>/subscriptions/<plan>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe/customer/<customer_id>/subscriptions/<subscription_id>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe/customer/all",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe/customer/create",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/stripe/customer/retrieve/<customer_id>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
+            "items": [
+              {
+                "path": "/charge",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/charge/all",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/coupon",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/coupon/all",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/events",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/events/all",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/events/customer/subscription",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/events/invoice",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/analytics",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/analytics/query",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/calendarList",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/calendarList/list",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/events",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/events/delete",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/events/list",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/events/patch",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/events/watch",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/freeBusy",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/google/calendar/freeBusy/query",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/outlook",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/outlook/webdav/",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/outlook/webdav/<calendar_id>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/outlook/webdav/b/<business_id:\\d+>/u/<user_id:\\d+>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/plan",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/plan/all",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/sendgrid",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/sendgrid/webhooks",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/sendgrid/webhooks/event",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/sendgrid/webhooks/inbound",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe/customer",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe/customer/<customer_id>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe/customer/<customer_id>/subscriptions",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe/customer/<customer_id>/subscriptions/<plan>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe/customer/<customer_id>/subscriptions/<subscription_id>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe/customer/all",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe/customer/create",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/stripe/customer/retrieve/<customer_id>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
           }
-        ]
-      },
-      {
-        "path": "/messaging",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": 1,
-        "param": null,
-        "subs": [
-          {
-            "path": "/thread/<thread_id:\\d+>/",
-            "method": null,
-            "status": "success",
-            "response": 200,
+        },
+        {
+          "path": "/messaging",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/thread/<thread_id:\\d+>/message/<message_id:\\d+>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/threads",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
+            "items": [
+              {
+                "path": "/thread/<thread_id:\\d+>/",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/thread/<thread_id:\\d+>/message/<message_id:\\d+>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/threads",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
           }
-        ]
-      },
-      {
-        "path": "/task",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": 1,
-        "param": null,
-        "subs": [
-          {
-            "path": "/counter",
-            "method": null,
-            "status": "success",
-            "response": 200,
+        },
+        {
+          "path": "/task",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/counter/last_access",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
+            "items": [
+              {
+                "path": "/counter",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/counter/last_access",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
           }
-        ]
-      },
-      {
-        "path": "/user/<user_id:\\d+>",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": null,
-        "param": null
-      },
-      {
-        "path": "/users",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": null,
-        "param": null,
-        "subs": [
-          {
-            "path": "/user",
-            "method": null,
-            "status": "success",
-            "response": 200,
+        },
+        {
+          "path": "/user/<user_id:\\d+>",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": null,
+          "param": null
+        },
+        {
+          "path": "/users",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": null,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/<user_id:\\d+>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/<user_id:\\d+>/business/<business_id:\\d+>",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/<user_id:\\d+>/business/<business_id:\\d+>/hours",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/<user_id:\\d+>/profile",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/appointments",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/authenticate",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/conversation",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/location",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/message",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/messages",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/register",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/requested_appointments",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/user/search",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
+            "items": [
+              {
+                "path": "/user",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/<user_id:\\d+>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/<user_id:\\d+>/business/<business_id:\\d+>",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/<user_id:\\d+>/business/<business_id:\\d+>/hours",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/<user_id:\\d+>/profile",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/appointments",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/authenticate",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/conversation",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/location",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/message",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/messages",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/register",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/requested_appointments",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/user/search",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
           }
-        ]
-      },
-      {
-        "path": "/utils",
-        "method": null,
-        "status": "success",
-        "response": 200,
-        "func": null,
-        "skip": 1,
-        "param": null,
-        "subs": [
-          {
-            "path": "/geocode",
-            "method": null,
-            "status": "success",
-            "response": 200,
+        },
+        {
+          "path": "/utils",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
             "func": null,
-            "skip": null,
-            "param": null
-          },
-          {
-            "path": "/geocode/ziptoloc",
-            "method": null,
-            "status": "success",
-            "response": 200,
-            "func": null,
-            "skip": null,
-            "param": null
+            "items": [
+              {
+                "path": "/geocode",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/geocode/ziptoloc",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
           }
-        ]
-      }
-    ]
+        }
+      ]
+    }
   }
 ]
