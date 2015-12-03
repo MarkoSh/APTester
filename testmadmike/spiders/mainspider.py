@@ -21,36 +21,13 @@ class MainspiderSpider(CrawlSpider):
     def parse(self, response):
         assert response.status == 404
         self.log.info('Url {} available, status is {} - correct'.format(response.url, response.status))
-        for path in self.paths:
-            if not path['skip']:
-                yield Request(url='{}{}'.format(self.host, path['path']), meta={
-                    'path': path
-                }, callback=self.checkStatus)
-            elif path['skip'] and 'subs' in path:
-                for path_ in path['subs']['items']:
-                    path_['path'] = path['path'] + path_['path']
-                    yield Request(url='{}{}'.format(self.host, path_['path']), meta={
-                        'path': path_
-                    }, callback=self.checkStatus)
+        self.startTesting()
 
-    def checkStatus(self, response):
-        path = response.meta['path']
-        if response.status == path['response']:
-            self.log.info('Url {} available, status is {} - correct'.format(response.url, response.status))
-        else:
-            self.log.error('Url {} unavailable, status is {} - incorrect'.format(response.url, response.status))
+    def startTesting(self):
+        if self.paths[0]['skip']:
+             for path in self.paths[0]['subs']['items']:
+                 path['path'] = self.paths[0]['path'] + path['path']
+                 self.testItem(path, self.paths[0]['subs']['func'])
 
-    def parse_(self, response):
-        if response.status == 200:
-            self.log.info('Url {} available'.format(response.url))
-            try:
-                data = json.loads(response.body)
-                if 'status' in data and data['status'] == 'success':
-                    self.log.success(data['message'])
-                else:
-                    self.log.error(data['message'])
-            except ValueError as e:
-                self.log.error(e)
-        else:
-            self.log.error('Url {} not available'.format(response.url))
-            self.log.error('Response status {}'.format(response.status))
+    def testItem(self, path, func):
+        pass
