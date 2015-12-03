@@ -29,12 +29,14 @@ class Tester():
         elif parent['param'] is not None:
             param = list(set(param + parent['param']))
 
-
         if path['skip'] and 'subs' in path or 'subs' in path:
             for path_ in path['subs']['items']:
                 path_['func'] = func
                 if path_['param'] is not None:
                     path_['param'] += param
+                else:
+                    path_['param'] = param
+
                 if 'subs' in path_ and path_['subs']['func'] is None:
                     path_['subs']['func'] = func
                 self.test(path_, path)
@@ -67,3 +69,5 @@ class Tester():
 
             else:
                 self.log.info('{} has not function'.format(link))
+
+            self.log.info(param)

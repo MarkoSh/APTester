@@ -75,7 +75,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["payment_method_id"]
                     },
                     {
                       "path": "/billing/stats",
@@ -111,7 +111,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["contact_id"]
                     },
                     {
                       "path": "/contacts/groups",
