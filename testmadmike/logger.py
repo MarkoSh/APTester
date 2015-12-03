@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+
+__author__ = 'mark'
+
 from datetime import datetime
-import colors, sys
+import colors
 
 class Logger():
     def __init__(self):

@@ -2,8 +2,7 @@
 
 __author__ = 'mark'
 
-import json, sys
-
+import json
 from v2.classes import Tester
 
 

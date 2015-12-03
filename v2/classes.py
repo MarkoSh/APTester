@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+__author__ = 'mark'
+
 import urllib2, json
 from testmadmike.logger import Logger
 
