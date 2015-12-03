@@ -3,6 +3,8 @@ import scrapy, json, sys
 from scrapy.spiders import CrawlSpider
 from scrapy.http import Request
 from testmadmike.logger import Logger
+from scrapy import optional_features
+optional_features.remove('boto')
 
 class MainspiderSpider(CrawlSpider):
     name = "mainspider"
