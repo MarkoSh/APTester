@@ -42,7 +42,7 @@
                   "func": null,
                   "items": [
                     {
-                      "path": "/<business_id:\\d+>/appointments",
+                      "path": "/appointments",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -51,7 +51,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/billing",
+                      "path": "/billing",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -60,7 +60,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/billing/payment_method",
+                      "path": "/billing/payment_method",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -69,7 +69,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/billing/payment_method/<payment_method_id>",
+                      "path": "/billing/payment_method/<payment_method_id>",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -78,7 +78,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/billing/stats",
+                      "path": "/billing/stats",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -87,7 +87,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/clone",
+                      "path": "/clone",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -96,7 +96,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/contacts",
+                      "path": "/contacts",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -105,7 +105,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/contacts/<contact_id>",
+                      "path": "/contacts/<contact_id>",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -114,7 +114,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/contacts/groups",
+                      "path": "/contacts/groups",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -123,7 +123,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/contacts/groups/<group_id:\\d+>",
+                      "path": "/contacts/groups/<group_id:\\d+>",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -132,7 +132,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/contacts/multi",
+                      "path": "/contacts/multi",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -141,7 +141,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/hours",
+                      "path": "/hours",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -150,7 +150,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/marketing/<marketing_id:\\d+>",
+                      "path": "/marketing/<marketing_id:\\d+>",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -159,7 +159,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/marketing/<marketing_id:\\d+>/stats",
+                      "path": "/marketing/<marketing_id:\\d+>/stats",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -168,7 +168,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/owner",
+                      "path": "/owner",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -177,7 +177,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/sales",
+                      "path": "/sales",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -186,7 +186,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/sales/logs",
+                      "path": "/sales/logs",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -195,7 +195,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/service/<service_id:\\d+>",
+                      "path": "/service/<service_id:\\d+>",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -204,7 +204,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/service/<service_id:\\d+>/disable",
+                      "path": "/service/<service_id:\\d+>/disable",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -213,7 +213,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/service/<service_id:\\d+>/enable",
+                      "path": "/service/<service_id:\\d+>/enable",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -222,7 +222,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/staff",
+                      "path": "/staff",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -231,7 +231,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>",
+                      "path": "/staff/<staff_id:\\d+>",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -240,7 +240,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>/disable",
+                      "path": "/staff/<staff_id:\\d+>/disable",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -249,7 +249,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>/enable",
+                      "path": "/staff/<staff_id:\\d+>/enable",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -258,7 +258,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/staff/delegated",
+                      "path": "/staff/delegated",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -267,7 +267,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/template/<template_id:\\d+>",
+                      "path": "/template/<template_id:\\d+>",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -276,7 +276,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/template/test/user/<user_id:\\d+>",
+                      "path": "/template/test/user/<user_id:\\d+>",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -285,7 +285,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/templates",
+                      "path": "/templates",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -294,7 +294,7 @@
                       "param": null
                     },
                     {
-                      "path": "/<business_id:\\d+>/templates/notifications/customers/settings",
+                      "path": "/templates/notifications/customers/settings",
                       "method": null,
                       "status": "success",
                       "response": 200,
@@ -991,7 +991,7 @@
           "method": null,
           "status": "success",
           "response": 200,
-          "func": null,
+          "func": "testUser",
           "skip": null,
           "param": null
         },
