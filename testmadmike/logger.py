@@ -19,7 +19,7 @@ class Logger():
 
     def error(self, msg='Error'):
         line = 'ERROR: {} - {}'.format(datetime.now().strftime(self.timeformat), msg)
-        print >> sys.stderr, colors.red(line)
+        print(colors.red(line))
         self.write_('error', line)
         self.write_('log', line)
 

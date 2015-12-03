@@ -5,7 +5,6 @@ class Tester():
     def __init__(self, host='http://localhost:8080'):
         self.host = host
         self.log = Logger()
-        pass
 
     def startTest(self, paths):
         for path in paths:
@@ -13,6 +12,8 @@ class Tester():
                 for path_ in path['subs']['items']:
                     if path_['func'] is None:
                         path_['func'] = path['subs']['func']
+                    if 'subs' in path_ and path_['subs']['func'] is None:
+                        path_['subs']['func'] = path['subs']['func']
                     self.test(path_, path)
 
     def test(self, path, parent):
@@ -27,9 +28,9 @@ class Tester():
         if path['skip'] and 'subs' in path or 'subs' in path:
             for path_ in path['subs']['items']:
                 if path_['func'] is None:
-                    path_['func'] = path['subs']['func']
+                    path_['func'] = func
                 if 'subs' in path_ and path_['subs']['func'] is None:
-                    path_['subs']['func'] = path['subs']['func']
+                    path_['subs']['func'] = func
                 self.test(path_, path)
         else:
             link = '{}{}'.format(self.host, path['path'])
@@ -42,14 +43,21 @@ class Tester():
                         self.log.info('{} available, status is {} - correct'.format(link, data.code))
                         try:
                             object = json.load(data.fp)
-                            self.log.info('{}, message: {}\n'.format(link, object['message']))
+                            self.log.info('{}, message: {}'.format(link, object['message']))
                         except ValueError as e:
-                            self.log.error('{}, error: {}\n'.format(link, e))
+                            self.log.error('{}, error: {}'.format(link, e))
                 except urllib2.HTTPError as data:
                     if data.code == path['response']:
-                        self.log.info('Url {} unavailable, status is {} - correct\n'.format(link, data.code))
+                        self.log.info('Url {} unavailable, status is {} - correct'.format(link, data.code))
                     else:
-                        self.log.error('Url {} unavailable, status is {} - incorrect\n'.format(link, data.code))
-                        # exit()
+                        self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.code))
+                        exit()
+
+            elif func == 'testBusiness':
+                self.log.info('{}, function: {}'.format(link, path['func']))
+
+            elif func == 'testUser':
+                self.log.info('{}, function: {}'.format(link, path['func']))
+
             else:
-                self.log.info('{} has not function\n'.format(link))
+                self.log.info('{} has not function'.format(link))

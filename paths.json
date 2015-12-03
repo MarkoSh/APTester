@@ -24,9 +24,9 @@
           "method": null,
           "status": "success",
           "response": 200,
-          "func": null,
+          "func": "testBusiness",
           "skip": 1,
-          "param": null,
+          "param": ["business_id"],
           "subs": {
             "func": null,
             "items": [
