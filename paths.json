@@ -129,7 +129,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["group_id"]
                     },
                     {
                       "path": "/contacts/multi",
@@ -156,7 +156,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["marketing_id"]
                     },
                     {
                       "path": "/marketing/<marketing_id:\\d+>/stats",
@@ -165,7 +165,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["marketing_id"]
                     },
                     {
                       "path": "/owner",
@@ -201,7 +201,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["service_id"]
                     },
                     {
                       "path": "/service/<service_id:\\d+>/disable",
@@ -210,7 +210,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["service_id"]
                     },
                     {
                       "path": "/service/<service_id:\\d+>/enable",
@@ -219,7 +219,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["service_id"]
                     },
                     {
                       "path": "/staff",
@@ -237,7 +237,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["staff_id"]
                     },
                     {
                       "path": "/staff/<staff_id:\\d+>/disable",
@@ -246,7 +246,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["staff_id"]
                     },
                     {
                       "path": "/staff/<staff_id:\\d+>/enable",
@@ -255,7 +255,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["staff_id"]
                     },
                     {
                       "path": "/staff/delegated",
@@ -273,7 +273,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["template_id"]
                     },
                     {
                       "path": "/template/test/user/<user_id:\\d+>",
@@ -282,7 +282,7 @@
                       "response": 200,
                       "func": null,
                       "skip": null,
-                      "param": null
+                      "param": ["user_id"]
                     },
                     {
                       "path": "/templates",
@@ -764,7 +764,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["calendar_id"]
               },
               {
                 "path": "/outlook/webdav/b/<business_id:\\d+>/u/<user_id:\\d+>",
@@ -773,7 +773,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["business_id", "user_id"]
               },
               {
                 "path": "/plan",
@@ -854,7 +854,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["customer_id"]
               },
               {
                 "path": "/stripe/customer/<customer_id>/subscriptions",
@@ -863,7 +863,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["customer_id"]
               },
               {
                 "path": "/stripe/customer/<customer_id>/subscriptions/<plan>",
@@ -872,7 +872,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["customer_id"]
               },
               {
                 "path": "/stripe/customer/<customer_id>/subscriptions/<subscription_id>",
@@ -881,7 +881,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["customer_id"]
               },
               {
                 "path": "/stripe/customer/all",
@@ -908,7 +908,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["customer_id"]
               }
             ]
           }
@@ -920,7 +920,7 @@
           "response": 200,
           "func": null,
           "skip": 1,
-          "param": null,
+          "param": ["thread_id"],
           "subs": {
             "func": null,
             "items": [
@@ -940,7 +940,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["message_id"]
               },
               {
                 "path": "/threads",
@@ -993,7 +993,7 @@
           "response": 200,
           "func": "testUser",
           "skip": null,
-          "param": null
+          "param": ["user_id"]
         },
         {
           "path": "/users",
@@ -1002,7 +1002,7 @@
           "response": 200,
           "func": null,
           "skip": null,
-          "param": null,
+          "param": ["user_id"],
           "subs": {
             "func": null,
             "items": [
@@ -1031,7 +1031,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["business_id"]
               },
               {
                 "path": "/user/<user_id:\\d+>/business/<business_id:\\d+>/hours",
@@ -1040,7 +1040,7 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": null
+                "param": ["business_id"]
               },
               {
                 "path": "/user/<user_id:\\d+>/profile",

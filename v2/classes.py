@@ -18,17 +18,23 @@ class Tester():
 
     def test(self, path, parent):
         path['path'] = parent['path'] + path['path']
-        func = None
+        func = path['func']
+        param = path['param']
 
-        if path['func'] is None and parent['subs']['func'] is not None:
+        if func is None:
             func = parent['subs']['func']
-        elif path['func'] is not None:
-            func = path['func']
+
+        if param is None:
+            param = parent['param']
+        elif parent['param'] is not None:
+            param = list(set(param + parent['param']))
+
 
         if path['skip'] and 'subs' in path or 'subs' in path:
             for path_ in path['subs']['items']:
-                if path_['func'] is None:
-                    path_['func'] = func
+                path_['func'] = func
+                if path_['param'] is not None:
+                    path_['param'] += param
                 if 'subs' in path_ and path_['subs']['func'] is None:
                     path_['subs']['func'] = func
                 self.test(path_, path)
