@@ -15,7 +15,6 @@ class MainspiderSpider(CrawlSpider):
     handle_httpstatus_list = [404, 405, 500]
     paths = json.load(open('paths.json', 'r'))
 
-
     def parse(self, response):
         assert response.status == 404
         log = logger()
