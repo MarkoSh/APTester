@@ -6,26 +6,38 @@ from datetime import datetime
 
 class MainspiderSpider(CrawlSpider):
     name = "mainspider"
-    allowed_domains = ["http://api-dot-bizzbook-app.appspot.com/"]
+    host = 'http://localhost:8080'
+
+    allowed_domains = ()
     start_urls = (
-        'http://api-dot-bizzbook-app.appspot.com/v2/dashboard/stats',
+        host,
     )
     handle_httpstatus_list = [404, 405, 500]
-    paths = [path.strip() for path in open('paths.txt', 'r').readlines() if 'cron' not in path]
+    paths = json.load(open('paths.json', 'r'))
+
 
     def parse(self, response):
+        assert response.status == 404
         log = logger()
-        log.info('Url {} available'.format(response.url))
-        try:
-            data = json.loads(response.body)
-            if 'status' in data and data['status'] == 'success':
-                log.success(data['message'])
-            else:
-                log.error(data['message'])
-            for path in self.paths:
-                yield Request(url='http://api-dot-bizzbook-app.appspot.com{}'.format(path), callback=self.parse_, dont_filter=True)
-        except ValueError as e:
-            log.error(e)
+        log.info('Url {} available, status is {} - correct'.format(response.url, response.status))
+        for path in self.paths:
+            if path['func'] == 'checkStatus':
+                if not path['skip']:
+                    yield Request(url='{}{}'.format(self.host, path['path']), meta={
+                        'path': path
+                    }, callback=self.checkStatus)
+                else:
+                    for path_ in path['subs']:
+                        path_['path'] = path['path'] + path_['path']
+                        yield Request(url='{}{}'.format(self.host, path_['path']), meta={
+                        'path': path_
+                    }, callback=self.checkStatus)
+
+    def checkStatus(self, response):
+        # assert response.status == 200
+        path = response.meta['path']
+        pass
+
 
     def parse_(self, response):
         log = logger()
@@ -59,6 +71,7 @@ class logger():
         line = 'ERROR: {} - {}'.format(datetime.now().strftime(self.timeformat), msg)
         print >> sys.stderr, colors.red(line)
         self.write('error', line)
+        self.write('log', line)
 
     def write(self, type, line):
         open('{}.log'.format(type), 'a').write('{}\n'.format(line))

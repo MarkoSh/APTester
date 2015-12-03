@@ -1,0 +1,892 @@
+[
+  {
+    "path": "/v2",
+    "method": null,
+    "func": "checkStatus",
+    "skip": 1,
+    "param": null,
+    "subs": [
+      {
+        "path": "/appointments",
+        "method": null,
+        "func": null,
+        "skip": null,
+        "param": null
+      },
+      {
+        "path": "/business",
+        "method": null,
+        "func": null,
+        "skip": 1,
+        "param": null,
+        "subs": [
+          {
+            "path": "/<business_id:\\d+>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null,
+            "subs": [
+              {
+                "path": "/<business_id:\\d+>/appointments",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/billing",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/billing/payment_method",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/billing/payment_method/<payment_method_id>",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/billing/stats",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/clone",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/contacts",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/contacts/<contact_id>",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/contacts/groups",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/contacts/groups/<group_id:\\d+>",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/contacts/multi",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/hours",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/marketing/<marketing_id:\\d+>",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/marketing/<marketing_id:\\d+>/stats",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/owner",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/sales",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/sales/logs",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/service/<service_id:\\d+>",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/service/<service_id:\\d+>/disable",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/service/<service_id:\\d+>/enable",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/staff",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>/disable",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/staff/<staff_id:\\d+>/enable",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/staff/delegated",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/template/<template_id:\\d+>",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/template/test/user/<user_id:\\d+>",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/templates",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              },
+              {
+                "path": "/<business_id:\\d+>/templates/notifications/customers/settings",
+                "method": null,
+                "func": null,
+                "skip": null,
+                "param": null
+              }
+            ]
+          },
+          {
+            "path": "/reviews",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/search",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/service",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/service/staff",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/services",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/staff",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/staff/availability",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      },
+      {
+        "path": "/businesses",
+        "method": null,
+        "func": null,
+        "skip": null,
+        "param": null,
+        "subs": [
+          {
+            "path": "/external",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/external/info/<id>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/external/search",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      },
+      {
+        "path": "/cron",
+        "method": null,
+        "func": null,
+        "skip": 1,
+        "param": null,
+        "subs": [
+          {
+            "path": "/<cron_type>/<time_unit>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/<time_unit>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/billing/calculate",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/counter",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/counter/last_access",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/trials",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      },
+      {
+        "path": "/dashboard/stats",
+        "method": null,
+        "func": null,
+        "skip": null,
+        "param": null
+      },
+      {
+        "path": "/event",
+        "method": null,
+        "func": null,
+        "skip": 1,
+        "param": null,
+        "subs": [
+          {
+            "path": "/appointment",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/generic",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/generic/delete",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/generic/update",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      },
+      {
+        "path": "/external",
+        "method": null,
+        "func": null,
+        "skip": 1,
+        "param": null,
+        "subs": [
+          {
+            "path": "/charge",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/charge/all",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/coupon",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/coupon/all",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/events",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/events/all",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/events/customer/subscription",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/events/invoice",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/analytics",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/analytics/query",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/calendarList",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/calendarList/list",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/events",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/events/delete",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/events/list",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/events/patch",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/events/watch",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/freeBusy",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/google/calendar/freeBusy/query",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/outlook",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/outlook/webdav/",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/outlook/webdav/<calendar_id>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/outlook/webdav/b/<business_id:\\d+>/u/<user_id:\\d+>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/plan",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/plan/all",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/sendgrid",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/sendgrid/webhooks",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/sendgrid/webhooks/event",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/sendgrid/webhooks/inbound",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe/customer",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe/customer/<customer_id>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe/customer/<customer_id>/subscriptions",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe/customer/<customer_id>/subscriptions/<plan>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe/customer/<customer_id>/subscriptions/<subscription_id>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe/customer/all",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe/customer/create",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/stripe/customer/retrieve/<customer_id>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      },
+      {
+        "path": "/messaging",
+        "method": null,
+        "func": null,
+        "skip": 1,
+        "param": null,
+        "subs": [
+          {
+            "path": "/thread/<thread_id:\\d+>/",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/thread/<thread_id:\\d+>/message/<message_id:\\d+>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/threads",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      },
+      {
+        "path": "/task",
+        "method": null,
+        "func": null,
+        "skip": 1,
+        "param": null,
+        "subs": [
+          {
+            "path": "/counter",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/counter/last_access",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      },
+      {
+        "path": "/user/<user_id:\\d+>",
+        "method": null,
+        "func": null,
+        "skip": null,
+        "param": null
+      },
+      {
+        "path": "/users",
+        "method": null,
+        "func": null,
+        "skip": null,
+        "param": null,
+        "subs": [
+          {
+            "path": "/user",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/<user_id:\\d+>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/<user_id:\\d+>/business/<business_id:\\d+>",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/<user_id:\\d+>/business/<business_id:\\d+>/hours",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/<user_id:\\d+>/profile",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/appointments",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/authenticate",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/conversation",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/location",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/message",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/messages",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/register",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/requested_appointments",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/user/search",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      },
+      {
+        "path": "/utils",
+        "method": null,
+        "func": null,
+        "skip": 1,
+        "param": null,
+        "subs": [
+          {
+            "path": "/geocode",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          },
+          {
+            "path": "/geocode/ziptoloc",
+            "method": null,
+            "func": null,
+            "skip": null,
+            "param": null
+          }
+        ]
+      }
+    ]
+  }
+]
