@@ -24,20 +24,20 @@ class Tester():
         path['path'] = parent['path'] + path['path']
         func = path['func']
         param = path['param']
-
         if func is None:
             func = parent['subs']['func']
-
         if param is None:
             param = parent['param']
         elif parent['param'] is not None:
             param = list(set(param + parent['param']))
-
         if path['skip'] and 'subs' in path or 'subs' in path:
             for path_ in path['subs']['items']:
                 path_['func'] = func
-                if path_['param'] is not None:
-                    path_['param'] += param
+                if path_['param'] is not None and param is not None:
+                    try:
+                        path_['param'] += param
+                    except TypeError as e:
+                        self.log.error(e)
                 else:
                     path_['param'] = param
 
@@ -46,7 +46,6 @@ class Tester():
                 self.test(path_, path)
         else:
             link = '{}{}'.format(self.host, path['path'])
-
             if func == 'checkStatus':
                 self.log.info('{}, function: {}'.format(link, path['func']))
                 try:
@@ -64,14 +63,8 @@ class Tester():
                     else:
                         self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.code))
                         exit()
-
             elif func == 'testBusiness':
                 self.log.info('{}, function: {}'.format(link, path['func']))
-
             elif func == 'testUser':
                 self.log.info('{}, function: {}'.format(link, path['func']))
-
-            else:
-                self.log.info('{} has not function'.format(link))
-
             self.log.info(param)
