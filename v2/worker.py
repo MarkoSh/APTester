@@ -10,5 +10,7 @@ host = 'http://localhost:8080'
 paths = json.load(open('../paths.json', 'r'))
 
 tester = Tester()
-tester.startTest(paths)
+tester.createDemo()
+# tester.startTest(paths)
+# tester.removeDemo()
 

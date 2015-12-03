@@ -2,13 +2,39 @@
 
 __author__ = 'mark'
 
-import urllib2, json
+import requests, json, random
 from testmadmike.logger import Logger
+import hashlib
 
 class Tester():
     def __init__(self, host='http://localhost:8080'):
         self.host = host
         self.log = Logger()
+
+    def createDemo(self):
+        ## Creating users
+        for i in range(0, 10):
+            string = hashlib.sha224()
+            string.update('{}'.format(random.random()))
+            first = 'first{}'.format(string.hexdigest()[0:10])
+            string.update('{}'.format(random.random()))
+            last = 'last{}'.format(string.hexdigest()[0:10])
+            email = 'email{}'.format(string.hexdigest()[0:10])
+            req = requests.post(url='{}{}'.format(self.host, '/v2/user/register'), data={
+                'first': first,
+                'last': last,
+                'tel': '8001234567',
+                'email': '{}@localhost.email'.format(email),
+                'pass': 'password',
+                'type': 'customer',
+            })
+            respone = req.json()
+            pass
+
+    def removeDemo(self):
+
+
+        pass
 
     def startTest(self, paths):
         for path in paths:
@@ -48,21 +74,19 @@ class Tester():
             link = '{}{}'.format(self.host, path['path'])
             if func == 'checkStatus':
                 self.log.info('{}, function: {}'.format(link, path['func']))
-                try:
-                    data = urllib2.urlopen(url=link)
-                    if data.code == path['response']:
-                        self.log.info('{} available, status is {} - correct'.format(link, data.code))
+                data = requests.get(url=link)
+                if data.status_code == path['response']:
+                    if data.status_code == requests.codes.ok:
+                        self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
                         try:
-                            object = json.load(data.fp)
-                            self.log.info('{}, message: {}'.format(link, object['message']))
+                            self.log.info('{}, message: {}'.format(link, data.json()['message']))
                         except ValueError as e:
                             self.log.error('{}, error: {}'.format(link, e))
-                except urllib2.HTTPError as data:
-                    if data.code == path['response']:
-                        self.log.info('Url {} unavailable, status is {} - correct'.format(link, data.code))
                     else:
-                        self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.code))
-                        exit()
+                        self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
+                else:
+                    self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
+                    exit()
             elif func == 'testBusiness':
                 self.log.info('{}, function: {}'.format(link, path['func']))
             elif func == 'testUser':
