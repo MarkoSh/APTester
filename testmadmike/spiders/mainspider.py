@@ -20,16 +20,23 @@ class MainspiderSpider(CrawlSpider):
         assert response.status == 404
         self.log.info('Url {} available, status is {} - correct'.format(response.url, response.status))
         for path in self.paths:
-            if not path['skip'] and not path['func']:
+            if not path['skip']:
                 yield Request(url='{}{}'.format(self.host, path['path']), meta={
                     'path': path
                 }, callback=self.checkStatus)
-
+            elif path['skip'] and 'subs' in path:
+                for path_ in path['subs']['items']:
+                    path_['path'] = path['path'] + path_['path']
+                    yield Request(url='{}{}'.format(self.host, path_['path']), meta={
+                        'path': path_
+                    }, callback=self.checkStatus)
 
     def checkStatus(self, response):
         path = response.meta['path']
-        assert response.status == path['response']
-        self.log.info('Url {} available, status is {} - correct'.format(response.url, response.status))
+        if response.status == path['response']:
+            self.log.info('Url {} available, status is {} - correct'.format(response.url, response.status))
+        else:
+            self.log.error('Url {} unavailable, status is {} - incorrect'.format(response.url, response.status))
 
     def parse_(self, response):
         if response.status == 200:
