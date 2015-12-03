@@ -10,6 +10,16 @@ class Tester():
     def __init__(self, host='http://localhost:8080'):
         self.host = host
         self.log = Logger()
+        self.log.info('Starting tests...')
+        self.log.info('Getting users...')
+        req = requests.get(url='{}/v2/users'.format(self.host))
+        if req.status_code == requests.codes.ok:
+            self.log.info('Trying to get JSON object with users...')
+            try:
+                self.users = req.json()['data']
+                self.log.success('JSON object with users got, users count {}'.format(len(self.users)))
+            except ValueError as e:
+                self.log.error('Getting JSON object failed with error {}'.format(e))
 
     def createDemo(self):
         ## Creating users
@@ -38,12 +48,6 @@ class Tester():
                 except ValueError as e:
                     self.log.error('Adding user {} failed, status {}'.format(email, e))
 
-
-    def removeDemo(self):
-
-
-        pass
-
     def startTest(self, paths):
         for path in paths:
             if path['skip'] and 'subs' in path or 'subs' in path:
@@ -64,6 +68,7 @@ class Tester():
             param = parent['param']
         elif parent['param'] is not None:
             param = list(set(param + parent['param']))
+
         if path['skip'] and 'subs' in path or 'subs' in path:
             for path_ in path['subs']['items']:
                 path_['func'] = func
@@ -80,23 +85,21 @@ class Tester():
                 self.test(path_, path)
         else:
             link = '{}{}'.format(self.host, path['path'])
+            self.log.info('{}, function: {}'.format(link, path['func']))
             if func == 'checkStatus':
-                self.log.info('{}, function: {}'.format(link, path['func']))
                 data = requests.get(url=link)
                 if data.status_code == path['response']:
                     if data.status_code == requests.codes.ok:
                         self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
                         try:
-                            self.log.info('{}, message: {}'.format(link, data.json()['message']))
+                            self.log.success('{}, message: {}'.format(link, data.json()['message']))
                         except ValueError as e:
                             self.log.error('{}, error: {}'.format(link, e))
                     else:
                         self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
                 else:
                     self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
-                    exit()
-            elif func == 'testBusiness':
-                self.log.info('{}, function: {}'.format(link, path['func']))
+                    # exit()
             elif func == 'testUser':
-                self.log.info('{}, function: {}'.format(link, path['func']))
+                pass
             self.log.info(param)
