@@ -20,7 +20,7 @@ class MainspiderSpider(CrawlSpider):
         assert response.status == 404
         self.log.info('Url {} available, status is {} - correct'.format(response.url, response.status))
         for path in self.paths:
-            if not path['skip']:
+            if not path['skip'] and not path['func']:
                 yield Request(url='{}{}'.format(self.host, path['path']), meta={
                     'path': path
                 }, callback=self.checkStatus)
