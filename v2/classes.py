@@ -13,7 +13,7 @@ class Tester():
 
     def createDemo(self):
         ## Creating users
-        for i in range(0, 10):
+        for i in range(0, 10000):
             string = hashlib.sha224()
             string.update('{}'.format(random.random()))
             first = 'first{}'.format(string.hexdigest()[0:10])
@@ -23,13 +23,21 @@ class Tester():
             req = requests.post(url='{}{}'.format(self.host, '/v2/user/register'), data={
                 'first': first,
                 'last': last,
-                'tel': '8001234567',
+                'tel': '{}'.format(random.randint(0000000000, 9999999999)),
                 'email': '{}@localhost.email'.format(email),
                 'pass': 'password',
                 'type': 'customer',
             })
-            respone = req.json()
-            pass
+            if req.status_code == requests.codes.ok:
+                data = req.json()
+                self.log.success('Adding user {} success, message {}'.format(email, data['message']))
+            else:
+                try:
+                    data = req.json()
+                    self.log.error('Adding user {} failed, error {}'.format(email, data['message']))
+                except ValueError as e:
+                    self.log.error('Adding user {} failed, status {}'.format(email, e))
+
 
     def removeDemo(self):
 
