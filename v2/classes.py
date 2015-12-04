@@ -58,7 +58,7 @@ class Tester():
                         if first == user['first_name'] and \
                                         last == user['last_name'] and \
                                         tel == str(user['phone_number']) and \
-                                        email == user['email']:#
+                                        email == user['email']:
                             self.log.success('Adding user {} success, message {}'.format(email, data['message']))
                         else:
                             self.log.error('Adding user failed')
