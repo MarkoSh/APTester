@@ -101,8 +101,8 @@ class Tester():
                         self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
                 else:
                     self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
-                    #TODO uncomment next line before start
-                    # exit()
+                    exit()
             elif func == 'testUser':
+                #TODO high priority!!!!!!!
                 pass
             self.log.info(param)

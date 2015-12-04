@@ -11,6 +11,151 @@
       "func": "checkStatus",
       "items": [
         {
+          "path": "/users",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": "testUser",
+          "skip": null,
+          "param": ["user_id"],
+          "subs": {
+            "func": null,
+            "items": [
+              {
+                "path": "/user",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": 1,
+                "param": ["user_id"],
+                "subs": {
+                  "func": null,
+                  "items": [
+                    {
+                      "path": "/<user_id:\\d+>",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/<user_id:\\d+>/business/<business_id:\\d+>",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": ["business_id"]
+                    },
+                    {
+                      "path": "/<user_id:\\d+>/business/<business_id:\\d+>/hours",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": ["business_id"]
+                    },
+                    {
+                      "path": "/<user_id:\\d+>/profile",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/appointments",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/authenticate",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/conversation",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/location",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/message",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/messages",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/register",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": 1,
+                      "param": null
+                    },
+                    {
+                      "path": "/requested_appointments",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/search",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": null,
+                      "param": null
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
           "path": "/appointments",
           "method": null,
           "status": "success",
@@ -430,7 +575,10 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": ["cron_type", "time_unit"]
+                "param": [
+                  "cron_type",
+                  "time_unit"
+                ]
               },
               {
                 "path": "/<time_unit>",
@@ -884,7 +1032,10 @@
                 "response": 200,
                 "func": null,
                 "skip": null,
-                "param": ["customer_id", "subscription_id"]
+                "param": [
+                  "customer_id",
+                  "subscription_id"
+                ]
               },
               {
                 "path": "/stripe/customer/all",
@@ -997,151 +1148,6 @@
           "func": "testUser",
           "skip": null,
           "param": ["user_id"]
-        },
-        {
-          "path": "/users",
-          "method": null,
-          "status": "success",
-          "response": 200,
-          "func": "testUser",
-          "skip": null,
-          "param": ["user_id"],
-          "subs": {
-            "func": null,
-            "items": [
-              {
-                "path": "/user",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": null,
-                "skip": 1,
-                "param": ["user_id"],
-                "subs": {
-                  "func": null,
-                  "items": [
-                    {
-                      "path": "/<user_id:\\d+>",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/<user_id:\\d+>/business/<business_id:\\d+>",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": ["business_id"]
-                    },
-                    {
-                      "path": "/<user_id:\\d+>/business/<business_id:\\d+>/hours",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": ["business_id"]
-                    },
-                    {
-                      "path": "/<user_id:\\d+>/profile",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/appointments",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/authenticate",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/conversation",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/location",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/message",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/messages",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/register",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": 1,
-                      "param": null
-                    },
-                    {
-                      "path": "/requested_appointments",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    },
-                    {
-                      "path": "/search",
-                      "method": null,
-                      "status": "success",
-                      "response": 200,
-                      "func": null,
-                      "skip": null,
-                      "param": null
-                    }
-                  ]
-                }
-              }
-            ]
-          }
         },
         {
           "path": "/utils",
