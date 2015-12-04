@@ -158,6 +158,7 @@ class Tester():
             except ConnectionError as e:
                 self.log.error('Request failed with error {}'.format(e))
                 exit()
+
     def testUser(self, path):
         random.shuffle(self.users)
         for i in range(0, 10):
@@ -170,14 +171,23 @@ class Tester():
                     self.log.info('Trying to get JSON object for user...')
                     try:
                         data = req.json()
-                        if data['data']['email'] == user['email']:
-                            self.log.success('User {}, {}, message: {}\n'.format(user['email'], link, data['message']))
-                        else:
-                            self.log.error('{}, message: {}'.format(link, data['message']))
-                            exit()
+                        user_ = data['data']
+                        for key, val in user_.iteritems():
+                            if key in user:
+                                if val == user[key]:
+                                    self.log.success('Received {}:{} equals expected {}:{}'.format(key, val, key, user[key]))
+                                else:
+                                    self.log.error('Received {}:{} not equals expected {}:{}'.format(key, val, key, user[key]))
+                                    exit()
+                            else:
+                                self.log.error('Received key {} not found in dict'.format(key))
+                                exit()
                     except ValueError as e:
                         self.log.error('Getting JSON object failed with error {}'.format(e))
                         exit()
+                else:
+                    self.log.error('{}, message: {}'.format(link, data['message']))
+                    exit()
             except ConnectionError as e:
                 self.log.error('Request failed with error {}'.format(e))
                 exit()
