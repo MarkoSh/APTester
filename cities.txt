@@ -14,7 +14,6 @@ Athens
 Atlanta
 Augusta
 Aurora
-Aurora
 Austin
 Bakersfield
 Baltimore
@@ -54,8 +53,6 @@ Clovis
 College Station
 Colorado Springs
 Columbia
-Columbia
-Columbus
 Columbus
 Concord
 Coral Springs
@@ -100,7 +97,6 @@ Garden Grove
 Garland
 Gilbert
 Glendale
-Glendale
 Grand Prairie
 Grand Rapids
 Green Bay
@@ -126,7 +122,6 @@ Jackson
 Jacksonville
 Jersey City
 Joliet
-Kansas City
 Kansas City
 Kent
 Killeen
@@ -193,7 +188,6 @@ Overland Park
 Oxnard
 Palm Bay
 Palmdale
-Pasadena
 Pasadena
 Paterson
 Pearland

@@ -31,7 +31,7 @@ class Tester():
 
     def createDemo(self):
         ## Creating users
-        for i in range(0, 10000):
+        for i in range(0, 10):
             string = hashlib.sha224()
             string.update('{}'.format(random.random()))
             first = 'first{}'.format(string.hexdigest()[0:10])
