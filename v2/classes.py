@@ -52,9 +52,9 @@ class Tester():
             else:
                 try:
                     data = req.json()
-                    self.log.error('Adding user {} failed, error {}'.format(email, data['message']))
+                    self.log.error('Adding user {} failed, message {}'.format(email, data['message']))
                 except ValueError as e:
-                    self.log.error('Adding user {} failed, status {}'.format(email, e))
+                    self.log.error('Adding user {} failed, error {}'.format(email, e))
 
     def startTest(self, paths):
         for path in paths:
@@ -104,8 +104,6 @@ class Tester():
                     exit()
             elif func == 'testUser':
                 self.testUser(path=path)
-
-            self.log.info(param)
 
     def testUser(self, path):
         random.shuffle(self.users)
