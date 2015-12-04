@@ -143,12 +143,13 @@ class Tester():
                     'user_id': user['email'],
                     'password': 'password'
                 })
-                if req.status_code == requests.codes.ok:
+                if req.status_code == path['response']:
                     self.log.info('Trying to get JSON object for user...')
                     try:
                         data = req.json()
-                        if data['data']['email'] == user['email']:
-                            self.log.success('User {}, {}, message: {}\n'.format(user['email'], link, data['message']))
+                        user_ = data['data']
+                        if user['email'] == user['email']:
+                            self.log.success('Received {}:{} equals expected {}:{}'.format('email', user_['email'], 'email', user['email']))
                         else:
                             self.log.error('{}, message: {}'.format(link, data['message']))
                             exit()
@@ -167,7 +168,7 @@ class Tester():
             try:
                 self.log.info('Getting user {}, {}...'.format(user['email'], link))
                 req = requests.get(url=link)
-                if req.status_code == requests.codes.ok:
+                if req.status_code == path['response']:
                     self.log.info('Trying to get JSON object for user...')
                     try:
                         data = req.json()
