@@ -3,7 +3,7 @@
 __author__ = 'mark'
 
 import requests, json, random
-from testmadmike.logger import Logger
+from logger import Logger
 import hashlib
 from requests.exceptions import ConnectionError
 
