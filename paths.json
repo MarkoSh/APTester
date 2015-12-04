@@ -38,6 +38,15 @@
                 "func": "authUser",
                 "skip": null,
                 "param": null
+              },
+              {
+                "path": "/location",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": "testLocation",
+                "skip": null,
+                "param": null
               }
             ]
           }
