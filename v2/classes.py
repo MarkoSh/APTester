@@ -5,14 +5,16 @@ __author__ = 'mark'
 import requests, json, random
 from testmadmike.logger import Logger
 import hashlib
+from requests.exceptions import ConnectionError
+
 
 class Tester():
     def __init__(self, host='http://localhost:8080'):
         self.host = host
         self.log = Logger()
         self.log.info('Starting tests...')
-        self.log.info('Getting users...')
         try:
+            self.log.info('Getting users...')
             req = requests.get(url='{}/v2/users'.format(self.host))
             if req.status_code == requests.codes.ok:
                 self.log.info('Trying to get JSON object with users...')
@@ -21,8 +23,10 @@ class Tester():
                     self.log.success('JSON object with users got, users count {}'.format(len(self.users)))
                 except ValueError as e:
                     self.log.error('Getting JSON object failed with error {}'.format(e))
+                    exit()
         except ConnectionError as e:
             self.log.error('Request failed with error {}'.format(e))
+            exit()
 
     def createDemo(self):
         ## Creating users
@@ -63,29 +67,24 @@ class Tester():
 
     def test(self, path, parent):
         path['path'] = parent['path'] + path['path']
+        if path['func'] is None and parent['subs']['func'] is not None:
+            path['func'] = parent['subs']['func']
+
+        if path['param'] is None and parent['param'] is not None:
+            path['param'] = parent['param']
+
+        elif path['param'] is not None and parent['param'] is not None:
+            path['param'] = list(set(path['param'] + parent['param']))
+
         func = path['func']
         param = path['param']
-        if func is None:
-            func = parent['subs']['func']
-        if param is None:
-            param = parent['param']
-        elif parent['param'] is not None:
-            param = list(set(param + parent['param']))
-        if path['skip'] and 'subs' in path or 'subs' in path:
-            for path_ in path['subs']['items']:
-                path_['func'] = func
-                if path_['param'] is not None and param is not None:
-                    try:
-                        path_['param'] += param
-                    except TypeError as e:
-                        self.log.error(e)
-                else:
-                    path_['param'] = param
 
-                if 'subs' in path_ and path_['subs']['func'] is None:
-                    path_['subs']['func'] = func
+        if 'subs' in path:
+            path['subs']['func'] = func
+            for path_ in path['subs']['items']:
                 self.test(path_, path)
-        else:
+
+        if not path['skip']:
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
             if func == 'checkStatus':
@@ -103,6 +102,26 @@ class Tester():
                     self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
                     exit()
             elif func == 'testUser':
-                #TODO high priority!!!!!!!
-                pass
+                self.testUser(path=path)
+
             self.log.info(param)
+
+    def testUser(self, path):
+        random.shuffle(self.users)
+        for i in range(0, 10):
+            user = self.users[i]
+            link = '{}{}'.format(self.host, path['path'].replace('<user_id:\\d+>', str(user['key']['id'])))
+            try:
+                self.log.info('Getting user {}, {}'.format(user['email'], link))
+                req = requests.get(url=link)
+                if req.status_code == requests.codes.ok:
+                    self.log.info('Trying to get JSON object for user...')
+                    try:
+                        data = req.json()
+                        self.log.success('{}, message: {}'.format(link, data['message']))
+                    except ValueError as e:
+                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                        exit()
+            except ConnectionError as e:
+                self.log.error('Request failed with error {}'.format(e))
+                exit()
