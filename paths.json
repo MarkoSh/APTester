@@ -1003,7 +1003,7 @@
           "method": null,
           "status": "success",
           "response": 200,
-          "func": null,
+          "func": "testUser",
           "skip": null,
           "param": ["user_id"],
           "subs": {

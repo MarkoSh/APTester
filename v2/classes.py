@@ -12,14 +12,17 @@ class Tester():
         self.log = Logger()
         self.log.info('Starting tests...')
         self.log.info('Getting users...')
-        req = requests.get(url='{}/v2/users'.format(self.host))
-        if req.status_code == requests.codes.ok:
-            self.log.info('Trying to get JSON object with users...')
-            try:
-                self.users = req.json()['data']
-                self.log.success('JSON object with users got, users count {}'.format(len(self.users)))
-            except ValueError as e:
-                self.log.error('Getting JSON object failed with error {}'.format(e))
+        try:
+            req = requests.get(url='{}/v2/users'.format(self.host))
+            if req.status_code == requests.codes.ok:
+                self.log.info('Trying to get JSON object with users...')
+                try:
+                    self.users = req.json()['data']
+                    self.log.success('JSON object with users got, users count {}'.format(len(self.users)))
+                except ValueError as e:
+                    self.log.error('Getting JSON object failed with error {}'.format(e))
+        except ConnectionError as e:
+            self.log.error('Request failed with error {}'.format(e))
 
     def createDemo(self):
         ## Creating users
