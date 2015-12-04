@@ -133,6 +133,27 @@ class Tester():
                 self.authUser(path=path)
             elif func == 'testLocation':
                 self.testLocation(path=path)
+            elif func == 'getStats':
+                self.getStats(path=path)
+
+    def getStats(self, path):
+        link = '{}{}'.format(self.host, path['path'])
+        try:
+            self.log.info('Get stats...')
+            req = requests.get(url=link)
+            try:
+                data = req.json()
+                if data['status'] == 'success':
+                    pass
+                else:
+                    self.log.error('Getting stats failed with message {}'.format(data['message']))
+                    exit()
+            except ValueError as e:
+                self.log.error('Getting JSON object failed with error {}'.format(e))
+                exit()
+        except ConnectionError as e:
+            self.log.error('Request failed with error {}'.format(e))
+            exit()
 
     def testLocation(self, path):
         link = '{}{}'.format(self.host, path['path'])

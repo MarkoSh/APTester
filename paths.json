@@ -50,6 +50,15 @@
               }
             ]
           }
+        },
+        {
+          "path": "/dashboard/stats",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": "getStats",
+          "skip": null,
+          "param": null
         }
       ]
     }
