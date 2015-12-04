@@ -39,7 +39,6 @@ class Tester():
             last = 'last{}'.format(string.hexdigest()[0:10])
             tel = '{}'.format(random.randint(0000000000, 9999999999))
             email = 'email{}@localhost.email'.format(string.hexdigest()[0:10])
-
             postData = {
                     'first': first,
                     'last': last,
@@ -48,7 +47,6 @@ class Tester():
                     'pass': 'password',
                     'type': 'customer',
                 }
-
             try:
                 req = requests.post(url='{}{}'.format(self.host, '/v2/user/register'), data=postData)
                 if req.status_code == requests.codes.ok:
@@ -94,21 +92,15 @@ class Tester():
         path['path'] = parent['path'] + path['path']
         if path['func'] is None and parent['subs']['func'] is not None:
             path['func'] = parent['subs']['func']
-
         if path['param'] is None and parent['param'] is not None:
             path['param'] = parent['param']
-
         elif path['param'] is not None and parent['param'] is not None:
             path['param'] = list(set(path['param'] + parent['param']))
-
         func = path['func']
-        param = path['param']
-
         if 'subs' in path:
             path['subs']['func'] = func
             for path_ in path['subs']['items']:
                 self.test(path_, path)
-
         if not path['skip']:
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
@@ -128,7 +120,6 @@ class Tester():
                     exit()
             elif func == 'testUser':
                 self.testUser(path=path)
-                # pass
             elif func == 'authUser':
                 self.authUser(path=path)
             elif func == 'testLocation':
@@ -177,11 +168,11 @@ class Tester():
                         self.log.error('Getting location failed with message {}'.format(data['message']))
                         exit()
                 except ValueError as e:
-                        self.log.error('Getting JSON object failed with error {}'.format(e))
-                        exit()
-            except ConnectionError as e:
-                    self.log.error('Request failed with error {}'.format(e))
+                    self.log.error('Getting JSON object failed with error {}'.format(e))
                     exit()
+            except ConnectionError as e:
+                self.log.error('Request failed with error {}'.format(e))
+                exit()
 
     def authUser(self, path):
         random.shuffle(self.users)
