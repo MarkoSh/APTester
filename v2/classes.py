@@ -16,6 +16,7 @@ class Tester():
         try:
             self.log.info('Getting users...')
             req = requests.get(url='{}/v2/users'.format(self.host))
+            self.log.success('Users got\n')
             if req.status_code == requests.codes.ok:
                 self.log.info('Trying to get JSON object with users...')
                 try:
@@ -112,7 +113,7 @@ class Tester():
             user = self.users[i]
             link = '{}{}'.format(self.host, path['path'].replace('<user_id:\\d+>', str(user['key']['id'])))
             try:
-                self.log.info('Getting user {}, {}'.format(user['email'], link))
+                self.log.info('Getting user {}, {}...'.format(user['email'], link))
                 req = requests.get(url=link)
                 if req.status_code == requests.codes.ok:
                     self.log.info('Trying to get JSON object for user...')
