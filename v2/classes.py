@@ -20,7 +20,7 @@ class Tester():
                 self.log.info('Trying to get JSON object with users...')
                 try:
                     self.users = req.json()['data']
-                    self.log.success('JSON object with users got, users count {}'.format(len(self.users)))
+                    self.log.success('JSON object with users got, users count {}\n'.format(len(self.users)))
                 except ValueError as e:
                     self.log.error('Getting JSON object failed with error {}'.format(e))
                     exit()
@@ -118,7 +118,11 @@ class Tester():
                     self.log.info('Trying to get JSON object for user...')
                     try:
                         data = req.json()
-                        self.log.success('{}, message: {}'.format(link, data['message']))
+                        if data['data']['email'] == user['email']:
+                            self.log.success('User {}, {}, message: {}\n'.format(user['email'], link, data['message']))
+                        else:
+                            self.log.error('{}, message: {}'.format(link, data['message']))
+                            exit()
                     except ValueError as e:
                         self.log.error('Getting JSON object failed with error {}'.format(e))
                         exit()
