@@ -144,6 +144,9 @@ class Tester():
             try:
                 data = req.json()
                 if data['status'] == 'success':
+                    self.log.success('Stats received')
+                    self.log.info('#TODO сделать обработку статы, пока что стата пустая, так что обработать нечего')
+                    #TODO сделать обработку статы, пока что стата пустая, так что обработать нечего
                     pass
                 else:
                     self.log.error('Getting stats failed with message {}'.format(data['message']))
