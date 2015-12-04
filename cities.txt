@@ -211,9 +211,7 @@ Reno
 Rialto
 Richardson
 Richmond
-Richmond
 Riverside
-Rochester
 Rochester
 Rockford
 Roseville
@@ -243,8 +241,6 @@ Simi Valley
 Sioux Falls
 South Bend
 Spokane
-Springfield
-Springfield
 Springfield
 St. Louis
 St. Petersburg
