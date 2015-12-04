@@ -68,7 +68,6 @@ class Tester():
             param = parent['param']
         elif parent['param'] is not None:
             param = list(set(param + parent['param']))
-
         if path['skip'] and 'subs' in path or 'subs' in path:
             for path_ in path['subs']['items']:
                 path_['func'] = func
@@ -99,6 +98,7 @@ class Tester():
                         self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
                 else:
                     self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
+                    #TODO uncomment next line before start
                     # exit()
             elif func == 'testUser':
                 pass
