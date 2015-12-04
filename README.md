@@ -2,7 +2,7 @@
 =
 Требования
 -
-0. pip install ansicolors
+0. pip install ansicolors requests hashlib json
 0. Python 2.7
 
 Запуск
