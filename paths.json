@@ -29,6 +29,15 @@
                 "func": "testUser",
                 "skip": null,
                 "param": null
+              },
+              {
+                "path": "/authenticate",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": "authUser",
+                "skip": null,
+                "param": null
               }
             ]
           }

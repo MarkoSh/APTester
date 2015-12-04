@@ -104,7 +104,36 @@ class Tester():
                     exit()
             elif func == 'testUser':
                 self.testUser(path=path)
+                # pass
+            elif func == 'authUser':
+                self.authUser(path=path)
 
+    def authUser(self, path):
+        random.shuffle(self.users)
+        for i in range(0, 10):
+            user = self.users[i]
+            link = '{}{}'.format(self.host, path['path'])
+            try:
+                self.log.info('Authenticate user {}, {}...'.format(user['email'], link))
+                req = requests.post(url=link, data={
+                    'user_id': user['email'],
+                    'password': 'password'
+                })
+                if req.status_code == requests.codes.ok:
+                    self.log.info('Trying to get JSON object for user...')
+                    try:
+                        data = req.json()
+                        if data['data']['email'] == user['email']:
+                            self.log.success('User {}, {}, message: {}\n'.format(user['email'], link, data['message']))
+                        else:
+                            self.log.error('{}, message: {}'.format(link, data['message']))
+                            exit()
+                    except ValueError as e:
+                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                        exit()
+            except ConnectionError as e:
+                self.log.error('Request failed with error {}'.format(e))
+                exit()
     def testUser(self, path):
         random.shuffle(self.users)
         for i in range(0, 10):
