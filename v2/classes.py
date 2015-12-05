@@ -105,18 +105,18 @@ class Tester():
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
             with Profiler() as p:
-                if func == 'checkStatus':
-                    self.checkStatus(path=path)
-                if func == 'testUser':
-                    self.testUser(path=path)
-                if func == 'authUser':
-                    self.authUser(path=path)
+                # if func == 'checkStatus':
+                #     self.checkStatus(path=path)
+                # if func == 'testUser':
+                #     self.testUser(path=path)
+                # if func == 'authUser':
+                #     self.authUser(path=path)
                 if func == 'testLocation':
                     self.testLocation(path=path)
-                if func == 'getStats':
-                    self.getStats(path=path)
-                if func == 'sendMessage':
-                    self.sendMessage(path=path)
+                # if func == 'getStats':
+                #     self.getStats(path=path)
+                # if func == 'sendMessage':
+                #     self.sendMessage(path=path)
 
     def checkStatus(self, path):
         link = '{}{}'.format(self.host, path['path'])
@@ -197,28 +197,30 @@ class Tester():
 
     def testLocation(self, path):
         link = '{}{}'.format(self.host, path['path'])
-        cities = [city.strip() for city in open('cities.txt', 'r').readlines()]
-        random.shuffle(cities)
-        cities = cities[0:10]
-        for city in cities:
-            try:
-                self.log.info('Search places for {}...'.format(city))
-                req = requests.get(url='{}?q={}'.format(link, city))
-                try:
-                    data = req.json()
-                    if data['status'] == 'success':
-                        self.log.success('Location got, places is:')
-                        for place in data['data']:
-                            self.log.success('{}'.format(place['place']))
-                    else:
-                        self.log.error('Getting location failed with message {}'.format(data['message']))
+        with open('cities.txt', 'r') as fp:
+            cities = [city.strip() for city in fp.readlines()]
+            random.shuffle(cities)
+            cities = cities[0:10]
+            for city in cities:
+                with Profiler() as p:
+                    try:
+                        self.log.info('Search places for {}...'.format(city))
+                        req = requests.get(url='{}?q={}'.format(link, city))
+                        try:
+                            data = req.json()
+                            if data['status'] == 'success':
+                                self.log.success('Location got, places is:')
+                                for place in data['data']:
+                                    self.log.success('{}'.format(place['place']))
+                            else:
+                                self.log.error('Getting location failed with message {}'.format(data['message']))
+                                exit()
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                            exit()
+                    except ConnectionError as e:
+                        self.log.error('Request failed with error {}'.format(e))
                         exit()
-                except ValueError as e:
-                    self.log.error('Getting JSON object failed with error {}'.format(e))
-                    exit()
-            except ConnectionError as e:
-                self.log.error('Request failed with error {}'.format(e))
-                exit()
 
     def authUser(self, path):
         random.shuffle(self.users)
