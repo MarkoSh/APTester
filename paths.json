@@ -68,6 +68,15 @@
           "func": "getStats",
           "skip": null,
           "param": null
+        },
+        {
+          "path": "/users",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": null,
+          "param": null
         }
       ]
     }

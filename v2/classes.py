@@ -104,30 +104,35 @@ class Tester():
         if not path['skip']:
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
-            if func == 'checkStatus':
-                data = requests.get(url=link)
-                if data.status_code == path['response']:
-                    if data.status_code == requests.codes.ok:
-                        self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
-                        try:
-                            self.log.success('{}, message: {}'.format(link, data.json()['message']))
-                        except ValueError as e:
-                            self.log.error('{}, error: {}'.format(link, e))
-                    else:
-                        self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
-                else:
-                    self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
-                    exit()
-            # elif func == 'testUser':
+            # if func == 'checkStatus':
+            #     self.checkStatus(path=path)
+            # if func == 'testUser':
             #     self.testUser(path=path)
-            # elif func == 'authUser':
-            #     self.authUser(path=path)
-            # elif func == 'testLocation':
+            if func == 'authUser':
+                self.authUser(path=path)
+            # if func == 'testLocation':
             #     self.testLocation(path=path)
-            # elif func == 'getStats':
+            # if func == 'getStats':
             #     self.getStats(path=path)
-            elif func == 'sendMessage':
-                self.sendMessage(path=path)
+            # if func == 'sendMessage':
+            #     self.sendMessage(path=path)
+
+    def checkStatus(self, path):
+        link = '{}{}'.format(self.host, path['path'])
+        data = requests.get(url=link)
+        if data.status_code == path['response']:
+            if data.status_code == requests.codes.ok:
+                self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
+                try:
+                    self.log.success('{}, message: {}'.format(link, data.json()['message']))
+                except ValueError as e:
+                    self.log.error('{}, error: {}'.format(link, e))
+                    exit()
+            else:
+                self.log.info('{} available, status is {} - correct'.format(link, data.status_code))
+        else:
+            self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
+            exit()
 
     def sendMessage(self, path):
         random.shuffle(self.users)
@@ -227,6 +232,13 @@ class Tester():
                     except ValueError as e:
                         self.log.error('Getting JSON object failed with error {}'.format(e))
                         exit()
+                else:
+                    try:
+                        data = req.json()
+                        self.log.error('User {} login failed, message: {}'.format(user['email'], data['message']))
+                    except ValueError as e:
+                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                    exit()
             except ConnectionError as e:
                 self.log.error('Request failed with error {}'.format(e))
                 exit()
