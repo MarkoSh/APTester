@@ -105,16 +105,16 @@ class Tester():
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
             with Profiler() as p:
-                # if func == 'checkStatus':
-                #     self.checkStatus(path=path)
-                # if func == 'testUser':
-                #     self.testUser(path=path)
-                # if func == 'authUser':
-                #     self.authUser(path=path)
-                # if func == 'testLocation':
-                #     self.testLocation(path=path)
-                # if func == 'getStats':
-                #     self.getStats(path=path)
+                if func == 'checkStatus':
+                    self.checkStatus(path=path)
+                if func == 'testUser':
+                    self.testUser(path=path)
+                if func == 'authUser':
+                    self.authUser(path=path)
+                if func == 'testLocation':
+                    self.testLocation(path=path)
+                if func == 'getStats':
+                    self.getStats(path=path)
                 if func == 'sendMessage':
                     self.sendMessage(path=path)
 
@@ -223,67 +223,69 @@ class Tester():
     def authUser(self, path):
         random.shuffle(self.users)
         for i in range(0, 10):
-            user = self.users[i]
-            link = '{}{}'.format(self.host, path['path'])
-            try:
-                self.log.info('Authenticate user {}, {}...'.format(user['email'], link))
-                req = requests.post(url=link, data={
-                    'user_id': user['email'],
-                    'password': 'password'
-                })
-                if req.status_code == path['response']:
-                    self.log.info('Trying to get JSON object for user...')
-                    try:
-                        data = req.json()
-                        user_ = data['data']
-                        if user['email'] == user['email']:
-                            self.log.success('Received {}:{} equals expected {}:{}'.format('email', user_['email'], 'email', user['email']))
-                        else:
-                            self.log.error('{}, message: {}'.format(link, data['message']))
+            with Profiler() as p:
+                user = self.users[i]
+                link = '{}{}'.format(self.host, path['path'])
+                try:
+                    self.log.info('Authenticate user {}, {}...'.format(user['email'], link))
+                    req = requests.post(url=link, data={
+                        'user_id': user['email'],
+                        'password': 'password'
+                    })
+                    if req.status_code == path['response']:
+                        self.log.info('Trying to get JSON object for user...')
+                        try:
+                            data = req.json()
+                            user_ = data['data']
+                            if user['email'] == user['email']:
+                                self.log.success('Received {}:{} equals expected {}:{}'.format('email', user_['email'], 'email', user['email']))
+                            else:
+                                self.log.error('{}, message: {}'.format(link, data['message']))
+                                exit()
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
                             exit()
-                    except ValueError as e:
-                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                    else:
+                        try:
+                            data = req.json()
+                            self.log.error('User {} login failed, message: {}'.format(user['email'], data['message']))
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
                         exit()
-                else:
-                    try:
-                        data = req.json()
-                        self.log.error('User {} login failed, message: {}'.format(user['email'], data['message']))
-                    except ValueError as e:
-                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                except ConnectionError as e:
+                    self.log.error('Request failed with error {}'.format(e))
                     exit()
-            except ConnectionError as e:
-                self.log.error('Request failed with error {}'.format(e))
-                exit()
 
     def testUser(self, path):
         random.shuffle(self.users)
         for i in range(0, 10):
-            user = self.users[i]
-            link = '{}{}'.format(self.host, path['path'].replace('<user_id:\\d+>', str(user['key']['id'])))
-            try:
-                self.log.info('Getting user {}, {}...'.format(user['email'], link))
-                req = requests.get(url=link)
-                if req.status_code == path['response']:
-                    self.log.info('Trying to get JSON object for user...')
-                    try:
-                        data = req.json()
-                        user_ = data['data']
-                        for key, val in user_.iteritems():
-                            if key in user:
-                                if val == user[key]:
-                                    self.log.success('Received {}:{} equals expected {}:{}'.format(key, val, key, user[key]))
+            with Profiler() as p:
+                user = self.users[i]
+                link = '{}{}'.format(self.host, path['path'].replace('<user_id:\\d+>', str(user['key']['id'])))
+                try:
+                    self.log.info('Getting user {}, {}...'.format(user['email'], link))
+                    req = requests.get(url=link)
+                    if req.status_code == path['response']:
+                        self.log.info('Trying to get JSON object for user...')
+                        try:
+                            data = req.json()
+                            user_ = data['data']
+                            for key, val in user_.iteritems():
+                                if key in user:
+                                    if val == user[key]:
+                                        self.log.success('Received {}:{} equals expected {}:{}'.format(key, val, key, user[key]))
+                                    else:
+                                        self.log.error('Received {}:{} not equals expected {}:{}'.format(key, val, key, user[key]))
+                                        exit()
                                 else:
-                                    self.log.error('Received {}:{} not equals expected {}:{}'.format(key, val, key, user[key]))
+                                    self.log.error('Received key {} not found in dict'.format(key))
                                     exit()
-                            else:
-                                self.log.error('Received key {} not found in dict'.format(key))
-                                exit()
-                    except ValueError as e:
-                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                            exit()
+                    else:
+                        self.log.error('{}, message: {}'.format(link, data['message']))
                         exit()
-                else:
-                    self.log.error('{}, message: {}'.format(link, data['message']))
+                except ConnectionError as e:
+                    self.log.error('Request failed with error {}'.format(e))
                     exit()
-            except ConnectionError as e:
-                self.log.error('Request failed with error {}'.format(e))
-                exit()
