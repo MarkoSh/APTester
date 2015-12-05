@@ -118,18 +118,14 @@ class Tester():
                 else:
                     self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
                     exit()
-            elif func == 'testUser':
-                return
-                self.testUser(path=path)
-            elif func == 'authUser':
-                return
-                self.authUser(path=path)
-            elif func == 'testLocation':
-                return
-                self.testLocation(path=path)
-            elif func == 'getStats':
-                return
-                self.getStats(path=path)
+            # elif func == 'testUser':
+            #     self.testUser(path=path)
+            # elif func == 'authUser':
+            #     self.authUser(path=path)
+            # elif func == 'testLocation':
+            #     self.testLocation(path=path)
+            # elif func == 'getStats':
+            #     self.getStats(path=path)
             elif func == 'sendMessage':
                 self.sendMessage(path=path)
 
