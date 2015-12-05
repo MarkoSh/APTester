@@ -111,12 +111,12 @@ class Tester():
                 #     self.testUser(path=path)
                 # if func == 'authUser':
                 #     self.authUser(path=path)
-                if func == 'testLocation':
-                    self.testLocation(path=path)
+                # if func == 'testLocation':
+                #     self.testLocation(path=path)
                 # if func == 'getStats':
                 #     self.getStats(path=path)
-                # if func == 'sendMessage':
-                #     self.sendMessage(path=path)
+                if func == 'sendMessage':
+                    self.sendMessage(path=path)
 
     def checkStatus(self, path):
         link = '{}{}'.format(self.host, path['path'])
