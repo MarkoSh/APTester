@@ -144,7 +144,18 @@ class Tester():
                 user_to = self.users[c]
                 users_to.append(user_to['email'])
             postData['send_to'] = ', '.join(users_to)
-            pass
+        ### Ошибочная отправка с включением самого отправителя в спиок
+        for i in range(0, 10):
+            user_from = self.users[i]['email']
+            users_to = list()
+            postData = {
+                    'sent_from': user_from,
+                }
+            link = '{}{}'.format(self.host, path['path'])
+            for c in range(0, random.randrange(1, 10)):
+                user_to = self.users[c]
+                users_to.append(user_to['email'])
+            postData['send_to'] = ', '.join(users_to)
 
     def getStats(self, path):
         link = '{}{}'.format(self.host, path['path'])
