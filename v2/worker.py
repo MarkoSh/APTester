@@ -22,7 +22,7 @@ ownparams = {
 
 for i in range(0, len(params)):
     param = params[i]
-    if param in ownparams['high']:
+    if param in ownparams['first']:
         if isinstance(params[i + 1], int):
             pass
 
