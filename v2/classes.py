@@ -104,18 +104,24 @@ class Tester():
         if not path['skip']:
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
-            # if func == 'checkStatus':
-            #     self.checkStatus(path=path)
-            # if func == 'testUser':
-            #     self.testUser(path=path)
+            if func == 'checkStatus':
+                self.checkStatus(path=path)
+                self.log.separator()
+            if func == 'testUser':
+                self.testUser(path=path)
+                self.log.separator()
             if func == 'authUser':
                 self.authUser(path=path)
-            # if func == 'testLocation':
-            #     self.testLocation(path=path)
-            # if func == 'getStats':
-            #     self.getStats(path=path)
-            # if func == 'sendMessage':
-            #     self.sendMessage(path=path)
+                self.log.separator()
+            if func == 'testLocation':
+                self.testLocation(path=path)
+                self.log.separator()
+            if func == 'getStats':
+                self.getStats(path=path)
+                self.log.separator()
+            if func == 'sendMessage':
+                self.sendMessage(path=path)
+                self.log.separator()
 
     def checkStatus(self, path):
         link = '{}{}'.format(self.host, path['path'])
@@ -137,6 +143,7 @@ class Tester():
     def sendMessage(self, path):
         random.shuffle(self.users)
         ### Коректная отправка с исключение самого отправителя из списка
+        self.log.info('Correct data sending...')
         for i in range(0, 10):
             user_from = self.users[i]['email']
             users_to = list()
@@ -148,8 +155,13 @@ class Tester():
             for c in range(0, random.randrange(1, 10)):
                 user_to = self.users[c]
                 users_to.append(user_to['email'])
-            postData['send_to'] = ', '.join(users_to)
-        ### Ошибочная отправка с включением самого отправителя в спиок
+            users_to = ', '.join(users_to)
+            postData['send_to'] = users_to
+            self.log.info('Sender {}'.format(user_from))
+            self.log.info('Receivers {}'.format(users_to))
+        self.log.separator()
+        ### Ошибочная отправка с включением самого отправителя в список
+        self.log.info('Incorrect data sending...')
         for i in range(0, 10):
             user_from = self.users[i]['email']
             users_to = list()
@@ -160,7 +172,10 @@ class Tester():
             for c in range(0, random.randrange(1, 10)):
                 user_to = self.users[c]
                 users_to.append(user_to['email'])
-            postData['send_to'] = ', '.join(users_to)
+            users_to = ', '.join(users_to)
+            postData['send_to'] = users_to
+            self.log.info('Sender {}'.format(user_from))
+            self.log.info('Receivers {}'.format(users_to))
 
     def getStats(self, path):
         link = '{}{}'.format(self.host, path['path'])

@@ -26,5 +26,9 @@ class Logger():
         self.write_('error', line)
         self.write_('log', line)
 
+    def separator(self):
+        line = '---------------------------------------------------------------'
+        print(colors.blue(line))
+
     def write_(self, type, line):
         open('{}.log'.format(type), 'a').write('{}\n'.format(line))
