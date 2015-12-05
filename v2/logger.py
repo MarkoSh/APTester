@@ -3,7 +3,16 @@
 __author__ = 'mark'
 
 from datetime import datetime
-import colors
+import colors, time
+
+class Profiler(object):
+    def __enter__(self):
+        self._startTime = time.time()
+
+    def __exit__(self, type, value, traceback):
+        log = Logger()
+        log.info("Elapsed time: {:.3f} sec".format(time.time() - self._startTime))
+        log.separator()
 
 class Logger():
     def __init__(self):

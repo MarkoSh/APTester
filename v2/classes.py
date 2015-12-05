@@ -3,7 +3,7 @@
 __author__ = 'mark'
 
 import requests, json, random
-from logger import Logger
+from logger import Logger, Profiler
 import hashlib
 from requests.exceptions import ConnectionError
 
@@ -104,24 +104,19 @@ class Tester():
         if not path['skip']:
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
-            if func == 'checkStatus':
-                self.checkStatus(path=path)
-                self.log.separator()
-            if func == 'testUser':
-                self.testUser(path=path)
-                self.log.separator()
-            if func == 'authUser':
-                self.authUser(path=path)
-                self.log.separator()
-            if func == 'testLocation':
-                self.testLocation(path=path)
-                self.log.separator()
-            if func == 'getStats':
-                self.getStats(path=path)
-                self.log.separator()
-            if func == 'sendMessage':
-                self.sendMessage(path=path)
-                self.log.separator()
+            with Profiler() as p:
+                # if func == 'checkStatus':
+                #     self.checkStatus(path=path)
+                # if func == 'testUser':
+                #     self.testUser(path=path)
+                # if func == 'authUser':
+                #     self.authUser(path=path)
+                # if func == 'testLocation':
+                #     self.testLocation(path=path)
+                # if func == 'getStats':
+                #     self.getStats(path=path)
+                if func == 'sendMessage':
+                    self.sendMessage(path=path)
 
     def checkStatus(self, path):
         link = '{}{}'.format(self.host, path['path'])
@@ -155,6 +150,7 @@ class Tester():
             for c in range(0, random.randrange(1, 10)):
                 user_to = self.users[c]
                 users_to.append(user_to['email'])
+            random.shuffle(users_to)
             users_to = ', '.join(users_to)
             postData['send_to'] = users_to
             self.log.info('Sender {}'.format(user_from))
@@ -172,6 +168,7 @@ class Tester():
             for c in range(0, random.randrange(1, 10)):
                 user_to = self.users[c]
                 users_to.append(user_to['email'])
+            random.shuffle(users_to)
             users_to = ', '.join(users_to)
             postData['send_to'] = users_to
             self.log.info('Sender {}'.format(user_from))
