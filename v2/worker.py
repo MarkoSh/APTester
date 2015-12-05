@@ -2,9 +2,29 @@
 
 __author__ = 'mark'
 
-import json
+import json, sys
 from classes import Tester
 from logger import Profiler
+
+params = sys.argv
+ownparams = {
+    'first': [
+        '--create-users',
+        '--create-businesses',
+        '--create-appoinments'
+    ],
+    'second': [
+        '--test-users',
+        '--test-businesses',
+        '--test-appoinments'
+    ]
+}
+
+for i in range(0, len(params)):
+    param = params[i]
+    if param in ownparams['high']:
+        if isinstance(params[i + 1], int):
+            pass
 
 host = 'http://localhost:8080'
 
