@@ -119,13 +119,36 @@ class Tester():
                     self.log.error('Url {} unavailable, status is {} - incorrect'.format(link, data.status_code))
                     exit()
             elif func == 'testUser':
+                return
                 self.testUser(path=path)
             elif func == 'authUser':
+                return
                 self.authUser(path=path)
             elif func == 'testLocation':
+                return
                 self.testLocation(path=path)
             elif func == 'getStats':
+                return
                 self.getStats(path=path)
+            elif func == 'sendMessage':
+                self.sendMessage(path=path)
+
+    def sendMessage(self, path):
+        random.shuffle(self.users)
+        ### Коректная отправка с исключение самого отправителя из списка
+        for i in range(0, 10):
+            user_from = self.users[i]['email']
+            users_to = list()
+            postData = {
+                    'sent_from': user_from,
+                }
+            self.users.pop(i)
+            link = '{}{}'.format(self.host, path['path'])
+            for c in range(0, random.randrange(1, 10)):
+                user_to = self.users[c]
+                users_to.append(user_to['email'])
+            postData['send_to'] = ', '.join(users_to)
+            pass
 
     def getStats(self, path):
         link = '{}{}'.format(self.host, path['path'])

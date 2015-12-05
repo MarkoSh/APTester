@@ -47,6 +47,15 @@
                 "func": "testLocation",
                 "skip": null,
                 "param": null
+              },
+              {
+                "path": "/message",
+                "method": "POST",
+                "status": "success",
+                "response": 200,
+                "func": "sendMessage",
+                "skip": null,
+                "param": null
               }
             ]
           }
