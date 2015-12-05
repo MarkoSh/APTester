@@ -138,7 +138,7 @@ class Tester():
     def sendMessage(self, path):
         random.shuffle(self.users)
         ### Коректная отправка с исключение самого отправителя из списка
-        self.log.info('Correct data sending...')
+        self.log.info('Correct receivers sending...')
         for i in range(0, 10):
             user_from = self.users[i]['email']
             users_to = list()
@@ -157,7 +157,7 @@ class Tester():
             self.log.info('Receivers {}'.format(users_to))
         self.log.separator()
         ### Ошибочная отправка с включением самого отправителя в список
-        self.log.info('Incorrect data sending...')
+        self.log.info('Incorrect receivers sending...')
         for i in range(0, 10):
             user_from = self.users[i]['email']
             users_to = list()
