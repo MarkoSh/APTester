@@ -291,7 +291,7 @@ class Tester():
                     try:
                         data = req.json()
                         if data['status'] == 'success':
-                            self.log.error('Message sent, thread created with id {}'.format(data['data']['thread_id']))
+                            self.log.error('Message sent, thread created with id {}, but error expected'.format(data['data']['thread_id']))
                             exit()
                         else:
                             self.log.success('Message sent, thread was not created with error'.format(data['message']))
