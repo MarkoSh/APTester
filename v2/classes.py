@@ -117,18 +117,19 @@ class Tester():
                 #     self.getStats(path=path)
                 # if func == 'sendMessage':
                 #     self.sendMessage(path=path)
-                # if func == 'ziptoloc':
-                #     self.ziptoloc(path=path)
-                if func == 'createCustomer':
-                    self.createCustomer(path=path)
+                if func == 'ziptoloc':
+                    self.ziptoloc(path=path)
+                # if func == 'createCustomer':
+                #     self.createCustomer(path=path)
 
     def createCustomer(self, path):
+        #TODO нужны бизнесы сначала
         pass
 
     def ziptoloc(self, path):
         link = '{}{}'.format(self.host, path['path'])
         self.log.info('Requesting convertation zip to location...')
-        for i in range(0, 20):
+        for i in range(0, 10):
             with Profiler() as p:
                 try:
                     zipcode = random.randint(10000, 99999)

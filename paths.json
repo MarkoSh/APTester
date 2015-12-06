@@ -61,13 +61,27 @@
           }
         },
         {
-          "path": "/dashboard/stats",
+          "path": "/dashboard",
           "method": null,
           "status": "success",
           "response": 200,
-          "func": "getStats",
-          "skip": null,
-          "param": null
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
+            "func": null,
+            "items": [
+              {
+                "path": "/stats",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": "getStats",
+                "skip": null,
+                "param": null
+              }
+            ]
+          }
         },
         {
           "path": "/users",
