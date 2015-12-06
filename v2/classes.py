@@ -30,14 +30,14 @@ class Tester():
 
     def createDemo(self):
         ## Creating users
-        for i in range(0, 100):
+        for i in range(0, 20):
             with Profiler() as p:
                 string = hashlib.sha224()
                 string.update('{}'.format(random.random()))
                 first = 'first{}'.format(string.hexdigest()[0:10])
                 string.update('{}'.format(random.random()))
                 last = 'last{}'.format(string.hexdigest()[0:10])
-                tel = '{}'.format(random.randint(0000000000, 9999999999))
+                tel = '{}'.format(8005550000 + i)
                 email = 'email{}@localhost.email'.format(string.hexdigest()[0:10])
                 postData = {
                         'first': first,
@@ -234,14 +234,14 @@ class Tester():
         ]
         ### Коректная отправка с исключение самого отправителя из списка
         self.log.info('Correct receivers sending...')
-        for i in range(0, 10):
+        for i in range(0, 3):
             user_from = self.users[i]['key']['id']
+            self.users.pop(i)
             users_to = list()
             postData = {
                     'sent_from': user_from,
                 }
-            self.users.pop(i)
-            for c in range(0, random.randrange(1, 10)):
+            for c in range(0, random.randrange(3, 10)):
                 user_to = self.users[c]
                 users_to.append(user_to['key']['id'])
             random.shuffle(users_to)
@@ -277,13 +277,12 @@ class Tester():
         self.log.separator()
         ### Ошибочная отправка с включением самого отправителя в список
         self.log.info('Incorrect receivers sending...')
-        for i in range(0, 10):
+        for i in range(0, 3):
             user_from = self.users[i]['key']['id']
             users_to = [user_from]
             postData = {
                     'sent_from': user_from,
                 }
-            self.users.pop(i)
             for c in range(0, random.randrange(3, 10)):
                 user_to = self.users[c]
                 users_to.append(user_to['key']['id'])
@@ -300,7 +299,7 @@ class Tester():
                     postData_['content'] = 'Content for message, {}, {}'.format(users_to, deliver_to)
                     try:
                         req = requests.post(url=link, data=postData_)
-                        if req.status_code == path['response']:
+                        if req.status_code == 500:
                             try:
                                 data = req.json()
                                 if data['status'] == 'success':
