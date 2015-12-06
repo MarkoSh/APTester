@@ -109,16 +109,16 @@ class Tester():
                 #     self.checkStatus(path=path)
                 # if func == 'testUser':
                 #     self.testUser(path=path)
-                # if func == 'authUser':
-                #     self.authUser(path=path)
+                if func == 'authUser':
+                    self.authUser(path=path)
                 # if func == 'testLocation':
                 #     self.testLocation(path=path)
                 # if func == 'getStats':
                 #     self.getStats(path=path)
                 # if func == 'sendMessage':
                 #     self.sendMessage(path=path)
-                if func == 'getMessages':
-                    self.getMessages(path=path)
+                # if func == 'getMessages':
+                #     self.getMessages(path=path)
                 # if func == 'ziptoloc':
                 #     self.ziptoloc(path=path)
                 # if func == 'createCustomer':
@@ -308,7 +308,7 @@ class Tester():
                         exit()
 
     def getMessages(self, path):
-
+        #TODO заполучить по айди пользователя
         pass
 
     def getStats(self, path):
@@ -375,9 +375,13 @@ class Tester():
                         self.log.info('Trying to get JSON object for user...')
                         try:
                             data = req.json()
-                            user_ = data['data']
-                            if user['email'] == user['email']:
-                                self.log.success('Received {}:{} equals expected {}:{}'.format('email', user_['email'], 'email', user['email']))
+                            if data['status'] == 'success':
+                                user_ = data['data']
+                                if user['email'] == user['email']:
+                                    self.log.success('Received {}:{} equals expected {}:{}'.format('email', user_['email'], 'email', user['email']))
+                                else:
+                                    self.log.error('{}, message: {}'.format(link, data['message']))
+                                    exit()
                             else:
                                 self.log.error('{}, message: {}'.format(link, data['message']))
                                 exit()
@@ -408,17 +412,21 @@ class Tester():
                         self.log.info('Trying to get JSON object for user...')
                         try:
                             data = req.json()
-                            user_ = data['data']
-                            for key, val in user_.iteritems():
-                                if key in user:
-                                    if val == user[key]:
-                                        self.log.success('Received {}:{} equals expected {}:{}'.format(key, val, key, user[key]))
+                            if data['status'] == 'success':
+                                user_ = data['data']
+                                for key, val in user_.iteritems():
+                                    if key in user:
+                                        if val == user[key]:
+                                            self.log.success('Received {}:{} equals expected {}:{}'.format(key, val, key, user[key]))
+                                        else:
+                                            self.log.error('Received {}:{} not equals expected {}:{}'.format(key, val, key, user[key]))
+                                            exit()
                                     else:
-                                        self.log.error('Received {}:{} not equals expected {}:{}'.format(key, val, key, user[key]))
+                                        self.log.error('Received key {} not found in dict'.format(key))
                                         exit()
-                                else:
-                                    self.log.error('Received key {} not found in dict'.format(key))
-                                    exit()
+                            else:
+                                self.log.error('{}, message: {}'.format(link, data['message']))
+                                exit()
                         except ValueError as e:
                             self.log.error('Getting JSON object failed with error {}'.format(e))
                             exit()
