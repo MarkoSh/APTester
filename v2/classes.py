@@ -16,12 +16,12 @@ class Tester():
         try:
             self.log.info('Getting users...')
             req = requests.get(url='{}/v2/users'.format(self.host))
-            self.log.success('Users got\n')
+            self.log.success('Users received\n')
             if req.status_code == requests.codes.ok:
                 self.log.info('Trying to get JSON object with users...')
                 try:
                     self.users = req.json()['data']
-                    self.log.success('JSON object with users got, users count {}\n'.format(len(self.users)))
+                    self.log.success('JSON object with users received, users count {}\n'.format(len(self.users)))
                 except ValueError as e:
                     self.log.error('Getting JSON object failed with error {}'.format(e))
                     exit()
@@ -111,8 +111,8 @@ class Tester():
                 #     self.testUser(path=path)
                 # if func == 'authUser':
                 #     self.authUser(path=path)
-                # if func == 'testLocation':
-                #     self.testLocation(path=path)
+                if func == 'testLocation':
+                    self.testLocation(path=path)
                 # if func == 'getStats':
                 #     self.getStats(path=path)
                 if func == 'sendMessage':
@@ -209,7 +209,7 @@ class Tester():
                         try:
                             data = req.json()
                             if data['status'] == 'success':
-                                self.log.success('Location got, places is:')
+                                self.log.success('Location received, places is:')
                                 for place in data['data']:
                                     self.log.success('{}'.format(place['place']))
                             else:
