@@ -105,20 +105,25 @@ class Tester():
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
             with Profiler() as p:
-                if func == 'checkStatus':
-                    self.checkStatus(path=path)
-                if func == 'testUser':
-                    self.testUser(path=path)
-                if func == 'authUser':
-                    self.authUser(path=path)
-                if func == 'testLocation':
-                    self.testLocation(path=path)
-                if func == 'getStats':
-                    self.getStats(path=path)
-                if func == 'sendMessage':
-                    self.sendMessage(path=path)
-                if func == 'ziptoloc':
-                    self.ziptoloc(path=path)
+                # if func == 'checkStatus':
+                #     self.checkStatus(path=path)
+                # if func == 'testUser':
+                #     self.testUser(path=path)
+                # if func == 'authUser':
+                #     self.authUser(path=path)
+                # if func == 'testLocation':
+                #     self.testLocation(path=path)
+                # if func == 'getStats':
+                #     self.getStats(path=path)
+                # if func == 'sendMessage':
+                #     self.sendMessage(path=path)
+                # if func == 'ziptoloc':
+                #     self.ziptoloc(path=path)
+                if func == 'createCustomer':
+                    self.createCustomer(path=path)
+
+    def createCustomer(self, path):
+        pass
 
     def ziptoloc(self, path):
         link = '{}{}'.format(self.host, path['path'])

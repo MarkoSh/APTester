@@ -114,6 +114,57 @@
               }
             ]
           }
+        },
+        {
+          "path": "/external",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
+            "func": null,
+            "items": [
+              {
+                "path": "/stripe",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": 1,
+                "param": null,
+                "subs": {
+                  "func": null,
+                  "items": [
+                    {
+                      "path": "/customer",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": 1,
+                      "param": null,
+                      "subs": {
+                        "func": null,
+                        "items": [
+                          {
+                            "path": "/create",
+                            "method": null,
+                            "status": "success",
+                            "response": 200,
+                            "func": "createCustomer",
+                            "skip": null,
+                            "param": null
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         }
       ]
     }
