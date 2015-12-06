@@ -84,12 +84,13 @@
           }
         },
         {
+          "_comment": "Не нуждается в тестирвоании отдельной функцией, так как обрабатывается в конструкторе тестера",
           "path": "/users",
           "method": null,
           "status": "success",
           "response": 200,
           "func": null,
-          "skip": null,
+          "skip": 1,
           "param": null
         },
         {
