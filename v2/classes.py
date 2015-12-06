@@ -419,7 +419,7 @@ class Tester():
 
     def testUser(self, path):
         random.shuffle(self.users)
-        for i in range(0, 10):
+        for i in range(0, 3):
             with Profiler() as p:
                 user = self.users[i]
                 link = '{}{}'.format(self.host, path['path'].replace('<user_id:\\d+>', str(user['key']['id'])))
