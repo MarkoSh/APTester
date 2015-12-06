@@ -10,18 +10,24 @@ params = sys.argv
 ownparams = {
     'first': [
         '--create-users',
-        '--create-businesses',
-        '--create-appoinments'
     ],
     'second': [
+        '--create-businesses',
         '--test-users',
+    ],
+    'third': [
         '--test-businesses',
+        '--create-appoinments'
+    ],
+    'fourth': [
         '--test-appoinments'
     ]
 }
-funcspool = {
+funcsstack = {
     'first': [],
-    'second': []
+    'second': [],
+    'third': [],
+    'fourth': []
 }
 
 for i in range(0, len(params)):
@@ -35,6 +41,6 @@ host = 'http://localhost:8080'
 with open('paths.json', 'r') as fp, Profiler() as p:
     paths = json.load(fp)
     tester = Tester()
-    tester.createDemo()
-    # tester.startTest(paths)
+    # tester.createDemo()
+    tester.startTest(paths)
 

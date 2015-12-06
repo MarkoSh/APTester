@@ -77,6 +77,43 @@
           "func": null,
           "skip": null,
           "param": null
+        },
+        {
+          "path": "/utils",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
+            "func": null,
+            "items": [
+              {
+                "path": "/geocode",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": 1,
+                "param": null,
+                "subs": {
+                  "func": null,
+                  "items": [
+                    {
+                      "path": "/ziptoloc",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": "ziptoloc",
+                      "skip": null,
+                      "param": null
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         }
       ]
     }

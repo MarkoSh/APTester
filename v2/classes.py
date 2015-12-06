@@ -112,12 +112,36 @@ class Tester():
                 #     self.testUser(path=path)
                 # if func == 'authUser':
                 #     self.authUser(path=path)
-                if func == 'testLocation':
-                    self.testLocation(path=path)
+                # if func == 'testLocation':
+                #     self.testLocation(path=path)
                 # if func == 'getStats':
                 #     self.getStats(path=path)
-                if func == 'sendMessage':
-                    self.sendMessage(path=path)
+                # if func == 'sendMessage':
+                #     self.sendMessage(path=path)
+                if func == 'ziptoloc':
+                    self.ziptoloc(path=path)
+
+    def ziptoloc(self, path):
+        link = '{}{}'.format(self.host, path['path'])
+        self.log.info('Requesting convertion zip to location...')
+        for i in range(0, 10):
+            try:
+                zipcode = random.randint(10000, 99999)
+                link_ = '{}?zip_code={}'.format(link, zipcode)
+                self.log.info('ZipCode is: {}'.format(zipcode))
+                req = requests.get(url=link_)
+                try:
+                    data = req.json()
+                    if data['status'] == 'success':
+                        self.log.success('Zip to location success, location is {}'.format(data['data']))
+                    else:
+                        self.log.error('Zip to location failed with message {}'.format(data['message']))
+                except ValueError as e:
+                    self.log.error('Getting JSON object failed with error {}'.format(e))
+                    exit()
+            except ConnectionError as e:
+                self.log.error('Request failed with error {}'.format(e))
+                exit()
 
     def checkStatus(self, path):
         link = '{}{}'.format(self.host, path['path'])
