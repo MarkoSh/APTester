@@ -214,43 +214,93 @@ class Tester():
             exit()
 
     def sendMessage(self, path):
+        link = '{}{}'.format(self.host, path['path'])
         random.shuffle(self.users)
+        deliver_to_list = [
+            'deliver_to_web',
+            'deliver_to_sms',
+            'deliver_to_email',
+            'deliver_to_voice'
+        ]
         ### Коректная отправка с исключение самого отправителя из списка
-        self.log.info('Correct receivers sending...')
-        for i in range(0, 10):
-            user_from = self.users[i]['email']
-            users_to = list()
-            postData = {
-                    'sent_from': user_from,
-                }
-            self.users.pop(i)
-            link = '{}{}'.format(self.host, path['path'])
-            for c in range(0, random.randrange(1, 10)):
-                user_to = self.users[c]
-                users_to.append(user_to['email'])
-            random.shuffle(users_to)
-            users_to = ', '.join(users_to)
-            postData['send_to'] = users_to
-            self.log.info('Sender {}'.format(user_from))
-            self.log.info('Receivers {}'.format(users_to))
-        self.log.separator()
+        # self.log.info('Correct receivers sending...')
+        # for i in range(0, 10):
+        #     user_from = self.users[i]['key']['id']
+        #     users_to = list()
+        #     postData = {
+        #             'sent_from': user_from,
+        #         }
+        #     self.users.pop(i)
+        #     for c in range(0, random.randrange(1, 10)):
+        #         user_to = self.users[c]
+        #         users_to.append(user_to['key']['id'])
+        #     random.shuffle(users_to)
+        #     users_to = ', '.join(['{}'.format(user_id) for user_id in users_to])
+        #     postData['send_to'] = users_to
+        #     postData['parent_thread'] = 'NEW_THREAD'
+        #
+        #     self.log.info('Sender {}'.format(user_from))
+        #     self.log.info('Receivers {}'.format(users_to))
+        #
+        #     for deliver_to in deliver_to_list:
+        #         postData_ = postData.copy()
+        #         postData_[deliver_to] = 1
+        #         postData_['content'] = 'Content for message, {}, {}'.format(users_to, deliver_to)
+        #         try:
+        #             req = requests.post(url=link, data=postData_)
+        #             try:
+        #                 data = req.json()
+        #                 if data['status'] == 'success':
+        #                     self.log.success('Message sent, thread created with id {}'.format(data['data']['thread_id']))
+        #                 else:
+        #                     self.log.error('Message sent, thread was not created with error'.format(data['message']))
+        #                     exit()
+        #             except ValueError as e:
+        #                 self.log.error('Getting JSON object failed with error {}'.format(e))
+        #                 exit()
+        #         except ConnectionError as e:
+        #             self.log.error('Request failed with error {}'.format(e))
+        #             exit()
+        #
+        # self.log.separator()
         ### Ошибочная отправка с включением самого отправителя в список
         self.log.info('Incorrect receivers sending...')
         for i in range(0, 10):
-            user_from = self.users[i]['email']
+            user_from = self.users[i]['key']['id']
             users_to = list()
             postData = {
                     'sent_from': user_from,
                 }
-            link = '{}{}'.format(self.host, path['path'])
             for c in range(0, random.randrange(1, 10)):
                 user_to = self.users[c]
-                users_to.append(user_to['email'])
+                users_to.append(user_to['key']['id'])
             random.shuffle(users_to)
-            users_to = ', '.join(users_to)
+            users_to = ', '.join(['{}'.format(user_id) for user_id in users_to])
             postData['send_to'] = users_to
+            postData['parent_thread'] = 'NEW_THREAD'
+
             self.log.info('Sender {}'.format(user_from))
             self.log.info('Receivers {}'.format(users_to))
+
+            for deliver_to in deliver_to_list:
+                postData_ = postData.copy()
+                postData_[deliver_to] = 1
+                postData_['content'] = 'Content for message, {}, {}'.format(users_to, deliver_to)
+                try:
+                    req = requests.post(url=link, data=postData_)
+                    try:
+                        data = req.json()
+                        if data['status'] == 'success':
+                            self.log.error('Message sent, thread created with id {}'.format(data['data']['thread_id']))
+                            exit()
+                        else:
+                            self.log.success('Message sent, thread was not created with error'.format(data['message']))
+                    except ValueError as e:
+                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                        exit()
+                except ConnectionError as e:
+                    self.log.error('Request failed with error {}'.format(e))
+                    exit()
 
     def getStats(self, path):
         link = '{}{}'.format(self.host, path['path'])
