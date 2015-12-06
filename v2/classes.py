@@ -117,10 +117,53 @@ class Tester():
                 #     self.getStats(path=path)
                 # if func == 'sendMessage':
                 #     self.sendMessage(path=path)
-                if func == 'ziptoloc':
-                    self.ziptoloc(path=path)
+                # if func == 'ziptoloc':
+                #     self.ziptoloc(path=path)
                 # if func == 'createCustomer':
                 #     self.createCustomer(path=path)
+                if func == 'searchBusiness':
+                    self.searchBusiness(path=path)
+
+    def searchBusiness(self, path):
+        link = '{}{}'.format(self.host, path['path'])
+        with open('businesskeys.txt', 'r') as fp:
+            businesskeys = [businesskey.strip() for businesskey in fp.readlines()]
+            random.shuffle(businesskeys)
+            businesskeys = businesskeys[0:10]
+            self.log.info('Search businesses by location data...')
+            for i in range(0, 10):
+                with Profiler() as p:
+                    try:
+                        zipcode = random.randint(10000, 99999)
+                        link_ = '{}/v2/utils/geocode/ziptoloc?zip_code={}'.format(self.host, zipcode)
+                        self.log.info('ZipCode is: {}'.format(zipcode))
+                        req = requests.get(url=link_)
+                        try:
+                            data = req.json()
+                            if data['status'] == 'success':
+                                if data['data']['city'] is not None:
+                                    self.log.success('Zip to location success, location is {}'.format(data['data']))
+                                    data_ = data['data']
+                                    link = '{}?q={}&lat={}&lng={}&location={}, {}'.format(link, 'library', data_['lat'], data_['lng'], data_['city'], data_['state'])
+                                    req_ = requests.get(url=link)
+                                    data__ = req_.json()
+                                    if data__['status'] == 'success':
+                                        self.log.success('Businesses search request done with {}'.format(data__['message']))
+                                        count = len(data__['data']['businesses'])
+                                        if count:
+                                            self.log.success('Found businesses: {}'.format(count))
+                                        else:
+                                            self.log.info('No businesses here (')
+                                    else:
+                                        self.log.error('Businesses search request done with {}'.format(data__['message']))
+                            else:
+                                self.log.error('Zip to location failed with message {}'.format(data['message']))
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                            exit()
+                    except ConnectionError as e:
+                        self.log.error('Request failed with error {}'.format(e))
+                        exit()
 
     def createCustomer(self, path):
         #TODO нужны бизнесы сначала

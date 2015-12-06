@@ -61,6 +61,29 @@
           }
         },
         {
+          "path": "/business",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": "testBusiness",
+          "skip": 1,
+          "param": ["business_id"],
+          "subs": {
+            "func": null,
+            "items": [
+              {
+                "path": "/search",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": "searchBusiness",
+                "skip": null,
+                "param": null
+              }
+            ]
+          }
+        },
+        {
           "path": "/dashboard",
           "method": null,
           "status": "success",
