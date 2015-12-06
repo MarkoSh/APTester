@@ -109,16 +109,16 @@ class Tester():
                 #     self.checkStatus(path=path)
                 # if func == 'testUser':
                 #     self.testUser(path=path)
-                if func == 'authUser':
-                    self.authUser(path=path)
+                # if func == 'authUser':
+                #     self.authUser(path=path)
                 # if func == 'testLocation':
                 #     self.testLocation(path=path)
                 # if func == 'getStats':
                 #     self.getStats(path=path)
                 # if func == 'sendMessage':
                 #     self.sendMessage(path=path)
-                # if func == 'getMessages':
-                #     self.getMessages(path=path)
+                if func == 'getMessages':
+                    self.getMessages(path=path)
                 # if func == 'ziptoloc':
                 #     self.ziptoloc(path=path)
                 # if func == 'createCustomer':
@@ -137,32 +137,36 @@ class Tester():
             for i in range(0, 10):
                 with Profiler() as p:
                     try:
-                        zipcode = random.randint(10000, 99999)
+                        zipcode = random.randint(1001, 99770)
                         link_ = '{}/v2/utils/geocode/ziptoloc?zip_code={}'.format(self.host, zipcode)
                         self.log.info('ZipCode is: {}'.format(zipcode))
                         req = requests.get(url=link_)
-                        try:
-                            data = req.json()
-                            if data['status'] == 'success':
-                                if data['data']['city'] is not None:
-                                    self.log.success('Zip to location success, location is {}'.format(data['data']))
-                                    data_ = data['data']
-                                    link = '{}?q={}&lat={}&lng={}&location={}, {}'.format(link, 'library', data_['lat'], data_['lng'], data_['city'], data_['state'])
-                                    req_ = requests.get(url=link)
-                                    data__ = req_.json()
-                                    if data__['status'] == 'success':
-                                        self.log.success('Businesses search request done with {}'.format(data__['message']))
-                                        count = len(data__['data']['businesses'])
-                                        if count:
-                                            self.log.success('Found businesses: {}'.format(count))
+                        if req.status_code == path['response']:
+                            try:
+                                data = req.json()
+                                if data['status'] == 'success':
+                                    if data['data']['city'] is not None:
+                                        self.log.success('Zip to location success, location is {}'.format(data['data']))
+                                        data_ = data['data']
+                                        link = '{}?q={}&lat={}&lng={}&location={}, {}'.format(link, 'library', data_['lat'], data_['lng'], data_['city'], data_['state'])
+                                        req_ = requests.get(url=link)
+                                        data__ = req_.json()
+                                        if data__['status'] == 'success':
+                                            self.log.success('Businesses search request done with {}'.format(data__['message']))
+                                            count = len(data__['data']['businesses'])
+                                            if count:
+                                                self.log.success('Found businesses: {}'.format(count))
+                                            else:
+                                                self.log.info('No businesses here :^(')
                                         else:
-                                            self.log.info('No businesses here (')
-                                    else:
-                                        self.log.error('Businesses search request done with {}'.format(data__['message']))
-                            else:
-                                self.log.error('Zip to location failed with message {}'.format(data['message']))
-                        except ValueError as e:
-                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                                            self.log.error('Businesses search request done with {}'.format(data__['message']))
+                                else:
+                                    self.log.error('Zip to location failed with message {}'.format(data['message']))
+                            except ValueError as e:
+                                self.log.error('Getting JSON object failed with error {}'.format(e))
+                                exit()
+                        else:
+                            self.log.error('Request failed')
                             exit()
                     except ConnectionError as e:
                         self.log.error('Request failed with error {}'.format(e))
@@ -178,21 +182,25 @@ class Tester():
         for i in range(0, 10):
             with Profiler() as p:
                 try:
-                    zipcode = random.randint(10000, 99999)
+                    zipcode = random.randint(1001, 99770)
                     link_ = '{}?zip_code={}'.format(link, zipcode)
                     self.log.info('ZipCode is: {}'.format(zipcode))
                     req = requests.get(url=link_)
-                    try:
-                        data = req.json()
-                        if data['status'] == 'success':
-                            if data['data']['city'] is not None:
-                                self.log.success('Zip to location success, location is {}'.format(data['data']))
+                    if req.status_code == path['response']:
+                        try:
+                            data = req.json()
+                            if data['status'] == 'success':
+                                if data['data']['city'] is not None:
+                                    self.log.success('Zip to location success, location is {}'.format(data['data']))
+                                else:
+                                    self.log.success('Zip to location success, but zip is not exists')
                             else:
-                                self.log.success('Zip to location success, but zip is not exists')
-                        else:
-                            self.log.error('Zip to location failed with message {}'.format(data['message']))
-                    except ValueError as e:
-                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                                self.log.error('Zip to location failed with message {}'.format(data['message']))
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                            exit()
+                    else:
+                        self.log.error('Request failed')
                         exit()
                 except ConnectionError as e:
                     self.log.error('Request failed with error {}'.format(e))
@@ -240,10 +248,8 @@ class Tester():
             users_to = ', '.join(['{}'.format(user_id) for user_id in users_to])
             postData['send_to'] = users_to
             postData['parent_thread'] = 'NEW_THREAD'
-
             self.log.info('Sender {}'.format(user_from))
             self.log.info('Receivers {}'.format(users_to))
-
             for deliver_to in deliver_to_list:
                 with Profiler() as p:
                     postData_ = postData.copy()
@@ -251,20 +257,23 @@ class Tester():
                     postData_['content'] = 'Content for message, {}, {}'.format(users_to, deliver_to)
                     try:
                         req = requests.post(url=link, data=postData_)
-                        try:
-                            data = req.json()
-                            if data['status'] == 'success':
-                                self.log.success('Message sent, thread created with id {} in mode {}'.format(data['data']['thread_id'], deliver_to))
-                            else:
-                                self.log.error('Message sent, thread was not created with error'.format(data['message']))
+                        if req.status_code == path['response']:
+                            try:
+                                data = req.json()
+                                if data['status'] == 'success':
+                                    self.log.success('Message sent, thread created with id {} in mode {}'.format(data['data']['thread_id'], deliver_to))
+                                else:
+                                    self.log.error('Message sent, thread was not created with error'.format(data['message']))
+                                    exit()
+                            except ValueError as e:
+                                self.log.error('Getting JSON object failed with error {}'.format(e))
                                 exit()
-                        except ValueError as e:
-                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                        else:
+                            self.log.error('Request failed')
                             exit()
                     except ConnectionError as e:
                         self.log.error('Request failed with error {}'.format(e))
                         exit()
-
         self.log.separator()
         ### Ошибочная отправка с включением самого отправителя в список
         self.log.info('Incorrect receivers sending...')
@@ -282,10 +291,8 @@ class Tester():
             users_to = ','.join(['{}'.format(user_id) for user_id in users_to])
             postData['send_to'] = users_to
             postData['parent_thread'] = 'NEW_THREAD'
-
             self.log.info('Sender {}'.format(user_from))
             self.log.info('Receivers {}'.format(users_to))
-
             for deliver_to in deliver_to_list:
                 with Profiler() as p:
                     postData_ = postData.copy()
@@ -293,15 +300,19 @@ class Tester():
                     postData_['content'] = 'Content for message, {}, {}'.format(users_to, deliver_to)
                     try:
                         req = requests.post(url=link, data=postData_)
-                        try:
-                            data = req.json()
-                            if data['status'] == 'success':
-                                self.log.error('Message sent, thread created with id {}, but error expected'.format(data['data']['thread_id']))
+                        if req.status_code == path['response']:
+                            try:
+                                data = req.json()
+                                if data['status'] == 'success':
+                                    self.log.error('Message sent, thread created with id {}, but error expected'.format(data['data']['thread_id']))
+                                    exit()
+                                else:
+                                    self.log.success('Message sent, thread was not created with error {} in mode {}'.format(data['message'], deliver_to))
+                            except ValueError as e:
+                                self.log.error('Getting JSON object failed with error {}'.format(e))
                                 exit()
-                            else:
-                                self.log.success('Message sent, thread was not created with error {} in mode {}'.format(data['message'], deliver_to))
-                        except ValueError as e:
-                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                        else:
+                            self.log.error('Request failed')
                             exit()
                     except ConnectionError as e:
                         self.log.error('Request failed with error {}'.format(e))
@@ -316,17 +327,21 @@ class Tester():
         try:
             self.log.info('Get stats...')
             req = requests.get(url=link)
-            try:
-                data = req.json()
-                if data['status'] == 'success':
-                    self.log.success('Stats received')
-                    self.log.info('#TODO сделать обработку статы, пока что стата пустая, так что обработать нечего')
-                    #TODO сделать обработку статы, пока что стата пустая, так что обработать нечего
-                else:
-                    self.log.error('Getting stats failed with message {}'.format(data['message']))
+            if req.status_code == path['response']:
+                try:
+                    data = req.json()
+                    if data['status'] == 'success':
+                        self.log.success('Stats received')
+                        self.log.info('#TODO сделать обработку статы, пока что стата пустая, так что обработать нечего')
+                        #TODO сделать обработку статы, пока что стата пустая, так что обработать нечего
+                    else:
+                        self.log.error('Getting stats failed with message {}'.format(data['message']))
+                        exit()
+                except ValueError as e:
+                    self.log.error('Getting JSON object failed with error {}'.format(e))
                     exit()
-            except ValueError as e:
-                self.log.error('Getting JSON object failed with error {}'.format(e))
+            else:
+                self.log.error('Request failed')
                 exit()
         except ConnectionError as e:
             self.log.error('Request failed with error {}'.format(e))
@@ -343,17 +358,21 @@ class Tester():
                     try:
                         self.log.info('Search places for {}...'.format(city))
                         req = requests.get(url='{}?q={}'.format(link, city))
-                        try:
-                            data = req.json()
-                            if data['status'] == 'success':
-                                self.log.success('Location received, places is:')
-                                for place in data['data']:
-                                    self.log.success('{}'.format(place['place']))
-                            else:
-                                self.log.error('Getting location failed with message {}'.format(data['message']))
+                        if req.status_code == path['response']:
+                            try:
+                                data = req.json()
+                                if data['status'] == 'success':
+                                    self.log.success('Location received, places is:')
+                                    for place in data['data']:
+                                        self.log.success('{}'.format(place['place']))
+                                else:
+                                    self.log.error('Getting location failed with message {}'.format(data['message']))
+                                    exit()
+                            except ValueError as e:
+                                self.log.error('Getting JSON object failed with error {}'.format(e))
                                 exit()
-                        except ValueError as e:
-                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                        else:
+                            self.log.error('Request failed')
                             exit()
                     except ConnectionError as e:
                         self.log.error('Request failed with error {}'.format(e))
