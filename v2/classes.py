@@ -31,52 +31,53 @@ class Tester():
 
     def createDemo(self):
         ## Creating users
-        for i in range(0, 10):
-            string = hashlib.sha224()
-            string.update('{}'.format(random.random()))
-            first = 'first{}'.format(string.hexdigest()[0:10])
-            string.update('{}'.format(random.random()))
-            last = 'last{}'.format(string.hexdigest()[0:10])
-            tel = '{}'.format(random.randint(0000000000, 9999999999))
-            email = 'email{}@localhost.email'.format(string.hexdigest()[0:10])
-            postData = {
-                    'first': first,
-                    'last': last,
-                    'tel': tel,
-                    'email': email,
-                    'pass': 'password',
-                    'type': 'customer',
-                }
-            try:
-                req = requests.post(url='{}{}'.format(self.host, '/v2/user/register'), data=postData)
-                if req.status_code == requests.codes.ok:
-                    try:
-                        data = req.json()
-                        user = data['data']
-                        if first == user['first_name'] and \
-                                        last == user['last_name'] and \
-                                        tel == str(user['phone_number']) and \
-                                        email == user['email']:
-                            self.log.success('Adding user {} success, message {}'.format(email, data['message']))
-                        else:
-                            self.log.error('Adding user failed')
-                            self.log.error('Posted data: {}'.format(postData))
-                            self.log.error('Received data: {}'.format(user))
+        for i in range(0, 100):
+            with Profiler() as p:
+                string = hashlib.sha224()
+                string.update('{}'.format(random.random()))
+                first = 'first{}'.format(string.hexdigest()[0:10])
+                string.update('{}'.format(random.random()))
+                last = 'last{}'.format(string.hexdigest()[0:10])
+                tel = '{}'.format(random.randint(0000000000, 9999999999))
+                email = 'email{}@localhost.email'.format(string.hexdigest()[0:10])
+                postData = {
+                        'first': first,
+                        'last': last,
+                        'tel': tel,
+                        'email': email,
+                        'pass': 'password',
+                        'type': 'customer',
+                    }
+                try:
+                    req = requests.post(url='{}{}'.format(self.host, '/v2/user/register'), data=postData)
+                    if req.status_code == requests.codes.ok:
+                        try:
+                            data = req.json()
+                            user = data['data']
+                            if first == user['first_name'] and \
+                                            last == user['last_name'] and \
+                                            tel == str(user['phone_number']) and \
+                                            email == user['email']:
+                                self.log.success('Adding user {} success, message {}'.format(email, data['message']))
+                            else:
+                                self.log.error('Adding user failed')
+                                self.log.error('Posted data: {}'.format(postData))
+                                self.log.error('Received data: {}'.format(user))
+                                exit()
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
                             exit()
-                    except ValueError as e:
-                        self.log.error('Getting JSON object failed with error {}'.format(e))
-                        exit()
-                else:
-                    try:
-                        data = req.json()
-                        self.log.error('Adding user {} failed, message {}'.format(email, data['message']))
-                        exit()
-                    except ValueError as e:
-                        self.log.error('Getting JSON object failed with error {}'.format(e))
-                        exit()
-            except ConnectionError as e:
-                self.log.error('Request failed with error {}'.format(e))
-                exit()
+                    else:
+                        try:
+                            data = req.json()
+                            self.log.error('Adding user {} failed, message {}'.format(email, data['message']))
+                            # exit()
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                            exit()
+                except ConnectionError as e:
+                    self.log.error('Request failed with error {}'.format(e))
+                    exit()
 
     def startTest(self, paths):
         for path in paths:

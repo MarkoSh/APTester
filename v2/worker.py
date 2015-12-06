@@ -19,6 +19,10 @@ ownparams = {
         '--test-appoinments'
     ]
 }
+funcspool = {
+    'first': [],
+    'second': []
+}
 
 for i in range(0, len(params)):
     param = params[i]
@@ -31,6 +35,6 @@ host = 'http://localhost:8080'
 with open('paths.json', 'r') as fp, Profiler() as p:
     paths = json.load(fp)
     tester = Tester()
-    # tester.createDemo()
-    tester.startTest(paths)
+    tester.createDemo()
+    # tester.startTest(paths)
 
