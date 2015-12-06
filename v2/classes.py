@@ -213,6 +213,7 @@ class Tester():
             exit()
 
     def sendMessage(self, path):
+        #TODO полнейший туду...
         random.shuffle(self.users)
         ### Коректная отправка с исключение самого отправителя из списка
         self.log.info('Correct receivers sending...')
