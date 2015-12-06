@@ -4,7 +4,7 @@ __author__ = 'mark'
 
 import json, sys
 from classes import Tester
-from logger import Profiler
+from logger import Profiler, Logger
 
 params = sys.argv
 ownparams = {
@@ -39,8 +39,11 @@ for i in range(0, len(params)):
 host = 'http://localhost:8080'
 
 with open('paths.json', 'r') as fp, Profiler() as p:
+    log = Logger()
+    log.info('Starting tests...')
     paths = json.load(fp)
     tester = Tester()
     # tester.createDemo()
     tester.startTest(paths)
+    log.info('End tests')
 

@@ -12,7 +12,6 @@ class Tester():
     def __init__(self, host='http://localhost:8080'):
         self.host = host
         self.log = Logger()
-        self.log.info('Starting tests...')
         try:
             self.log.info('Getting users...')
             req = requests.get(url='{}/v2/users'.format(self.host))
@@ -106,42 +105,46 @@ class Tester():
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
             with Profiler() as p:
-                # if func == 'checkStatus':
-                #     self.checkStatus(path=path)
-                # if func == 'testUser':
-                #     self.testUser(path=path)
-                # if func == 'authUser':
-                #     self.authUser(path=path)
-                # if func == 'testLocation':
-                #     self.testLocation(path=path)
-                # if func == 'getStats':
-                #     self.getStats(path=path)
-                # if func == 'sendMessage':
-                #     self.sendMessage(path=path)
+                if func == 'checkStatus':
+                    self.checkStatus(path=path)
+                if func == 'testUser':
+                    self.testUser(path=path)
+                if func == 'authUser':
+                    self.authUser(path=path)
+                if func == 'testLocation':
+                    self.testLocation(path=path)
+                if func == 'getStats':
+                    self.getStats(path=path)
+                if func == 'sendMessage':
+                    self.sendMessage(path=path)
                 if func == 'ziptoloc':
                     self.ziptoloc(path=path)
 
     def ziptoloc(self, path):
         link = '{}{}'.format(self.host, path['path'])
-        self.log.info('Requesting convertion zip to location...')
-        for i in range(0, 10):
-            try:
-                zipcode = random.randint(10000, 99999)
-                link_ = '{}?zip_code={}'.format(link, zipcode)
-                self.log.info('ZipCode is: {}'.format(zipcode))
-                req = requests.get(url=link_)
+        self.log.info('Requesting convertation zip to location...')
+        for i in range(0, 20):
+            with Profiler() as p:
                 try:
-                    data = req.json()
-                    if data['status'] == 'success':
-                        self.log.success('Zip to location success, location is {}'.format(data['data']))
-                    else:
-                        self.log.error('Zip to location failed with message {}'.format(data['message']))
-                except ValueError as e:
-                    self.log.error('Getting JSON object failed with error {}'.format(e))
+                    zipcode = random.randint(10000, 99999)
+                    link_ = '{}?zip_code={}'.format(link, zipcode)
+                    self.log.info('ZipCode is: {}'.format(zipcode))
+                    req = requests.get(url=link_)
+                    try:
+                        data = req.json()
+                        if data['status'] == 'success':
+                            if data['data']['city'] is not None:
+                                self.log.success('Zip to location success, location is {}'.format(data['data']))
+                            else:
+                                self.log.success('Zip to location success, but zip is not exists')
+                        else:
+                            self.log.error('Zip to location failed with message {}'.format(data['message']))
+                    except ValueError as e:
+                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                        exit()
+                except ConnectionError as e:
+                    self.log.error('Request failed with error {}'.format(e))
                     exit()
-            except ConnectionError as e:
-                self.log.error('Request failed with error {}'.format(e))
-                exit()
 
     def checkStatus(self, path):
         link = '{}{}'.format(self.host, path['path'])
