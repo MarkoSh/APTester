@@ -115,16 +115,17 @@ class Tester():
                 #     self.testLocation(path=path)
                 # if func == 'getStats':
                 #     self.getStats(path=path)
-                # if func == 'sendMessage':
-                #     self.sendMessage(path=path)
+                if func == 'sendMessage':
+                    self.sendMessage(path=path)
                 # if func == 'ziptoloc':
                 #     self.ziptoloc(path=path)
                 # if func == 'createCustomer':
                 #     self.createCustomer(path=path)
-                if func == 'searchBusiness':
-                    self.searchBusiness(path=path)
+                # if func == 'searchBusiness':
+                #     self.searchBusiness(path=path)
 
     def searchBusiness(self, path):
+        #TODO оказывается это не тот поиск (
         link = '{}{}'.format(self.host, path['path'])
         with open('businesskeys.txt', 'r') as fp:
             businesskeys = [businesskey.strip() for businesskey in fp.readlines()]
@@ -213,7 +214,6 @@ class Tester():
             exit()
 
     def sendMessage(self, path):
-        #TODO полнейший туду...
         random.shuffle(self.users)
         ### Коректная отправка с исключение самого отправителя из списка
         self.log.info('Correct receivers sending...')
