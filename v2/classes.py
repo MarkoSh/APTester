@@ -115,8 +115,10 @@ class Tester():
                 #     self.testLocation(path=path)
                 # if func == 'getStats':
                 #     self.getStats(path=path)
-                if func == 'sendMessage':
-                    self.sendMessage(path=path)
+                # if func == 'sendMessage':
+                #     self.sendMessage(path=path)
+                if func == 'getMessages':
+                    self.getMessages(path=path)
                 # if func == 'ziptoloc':
                 #     self.ziptoloc(path=path)
                 # if func == 'createCustomer':
@@ -304,6 +306,10 @@ class Tester():
                     except ConnectionError as e:
                         self.log.error('Request failed with error {}'.format(e))
                         exit()
+
+    def getMessages(self, path):
+
+        pass
 
     def getStats(self, path):
         link = '{}{}'.format(self.host, path['path'])

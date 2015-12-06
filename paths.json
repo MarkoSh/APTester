@@ -56,6 +56,15 @@
                 "func": "sendMessage",
                 "skip": null,
                 "param": null
+              },
+              {
+                "path": "/messages",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": "getMessages",
+                "skip": null,
+                "param": null
               }
             ]
           }
