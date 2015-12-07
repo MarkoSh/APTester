@@ -318,8 +318,34 @@ class Tester():
                         exit()
 
     def getMessages(self, path):
-        #TODO заполучить по айди пользователя
-        pass
+        link = '{}{}'.format(self.host, path['path'])
+        self.log.info('Requesting conversations...')
+        for user in self.users:
+            with Profiler() as p:
+                link_ = '{}?user_id={}'.format(link, user['key']['id'])
+                try:
+                    req = requests.get(url=link_)
+                    if req.status_code == path['response']:
+                        try:
+                            data = req.json()
+                            if data['status'] == 'success':
+                                conversatons = data['data']
+                                if len(conversatons):
+                                    self.log.success('Found {} conversations for user {}'.format(len(conversatons), user['key']['id']))
+                                    for conversaton in conversatons:
+                                        self.log.success('Conversation id {}'.format(conversaton['conversation_id']))
+                            else:
+                                self.log.error('Request failed')
+                                exit()
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                            exit()
+                    else:
+                        self.log.error('Request failed')
+                        exit()
+                except ConnectionError as e:
+                    self.log.error('Request failed with error {}'.format(e))
+                    exit()
 
     def getStats(self, path):
         link = '{}{}'.format(self.host, path['path'])
