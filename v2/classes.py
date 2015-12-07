@@ -365,12 +365,23 @@ class Tester():
                                 if len(conversations):
                                     self.log.success('Found {} conversations for user {}'.format(len(conversations), user['key']['id']))
                                     for conversation in conversations:
-                                        self.log.success('Conversation id {}'.format(conversation['conversation_id']))
                                         link__ = '{}?user_id={}&thread_id={}'.format(link, user['key']['id'], conversation['conversation_id'])
+                                        self.log.success('Conversation link {}'.format(link__))
                                         req_ = requests.get(url=link__)
                                         data_ = req_.json()
-                                        #TODO могу вывести саму мессагу либо произвести проверку на совпадение с отправителем.
-                                        break
+                                        if data_['status'] == 'success':
+                                            sender = data_['data'][0]['sender']['user_key']['id']
+                                            participants = [participant['id'] for participant in data_['data'][0]['participants']]
+                                            if sender == user['key']['id'] or user['key']['id'] in participants:
+                                                self.log.success('Conversation id {} sender/participants contains current user {}'.format(conversation['conversation_id'], user['key']['id']))
+                                            else:
+                                                self.log.error('Conversation id {} sender/participants not contains current user {}'.format(conversation['conversation_id'], user['key']['id']))
+                                                exit()
+                                        else:
+                                            self.log.error('Request failed')
+                                            exit()
+
+                                    break
                             else:
                                 self.log.error('Request failed')
                                 exit()
