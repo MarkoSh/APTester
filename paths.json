@@ -40,6 +40,15 @@
                 "param": null
               },
               {
+                "path": "/conversation",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": "readConversation",
+                "skip": null,
+                "param": ["thread_id"]
+              },
+              {
                 "path": "/location",
                 "method": null,
                 "status": "success",

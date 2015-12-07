@@ -117,8 +117,10 @@ class Tester():
                 #     self.getStats(path=path)
                 # if func == 'sendMessage':
                 #     self.sendMessage(path=path)
-                if func == 'getMessages':
-                    self.getMessages(path=path)
+                # if func == 'getMessages':
+                #     self.getMessages(path=path)
+                if func == "readConversation":
+                    self.readConversation(path=path)
                 # if func == 'ziptoloc':
                 #     self.ziptoloc(path=path)
                 # if func == 'createCustomer':
@@ -334,6 +336,41 @@ class Tester():
                                     self.log.success('Found {} conversations for user {}'.format(len(conversatons), user['key']['id']))
                                     for conversaton in conversatons:
                                         self.log.success('Conversation id {}'.format(conversaton['conversation_id']))
+                            else:
+                                self.log.error('Request failed')
+                                exit()
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                            exit()
+                    else:
+                        self.log.error('Request failed')
+                        exit()
+                except ConnectionError as e:
+                    self.log.error('Request failed with error {}'.format(e))
+                    exit()
+
+    def readConversation(self, path):
+        link = '{}{}'.format(self.host, path['path'])
+        self.log.info('Requesting conversation...')
+        for user in self.users:
+            with Profiler() as p:
+                link_ = '{}/v2/user/messages?user_id={}'.format(self.host, user['key']['id'])
+                try:
+                    req = requests.get(url=link_)
+                    if req.status_code == path['response']:
+                        try:
+                            data = req.json()
+                            if data['status'] == 'success':
+                                conversations = data['data']
+                                if len(conversations):
+                                    self.log.success('Found {} conversations for user {}'.format(len(conversations), user['key']['id']))
+                                    for conversation in conversations:
+                                        self.log.success('Conversation id {}'.format(conversation['conversation_id']))
+                                        link__ = '{}?user_id={}&thread_id={}'.format(link, user['key']['id'], conversation['conversation_id'])
+                                        req_ = requests.get(url=link__)
+                                        data_ = req_.json()
+                                        #TODO могу вывести саму мессагу либо произвести проверку на совпадение с отправителем.
+                                        break
                             else:
                                 self.log.error('Request failed')
                                 exit()
