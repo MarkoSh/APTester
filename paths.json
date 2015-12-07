@@ -48,7 +48,6 @@
                 "skip": null,
                 "param": null
               },
-
               {
                 "path": "/message",
                 "method": "POST",
@@ -98,6 +97,66 @@
                 "func": "searchBusiness",
                 "skip": null,
                 "param": null
+              }
+            ]
+          }
+        },
+        {
+          "path": "/businesses",
+          "method": null,
+          "status": "success",
+          "response": 200,
+          "func": null,
+          "skip": 1,
+          "param": null,
+          "subs": {
+            "func": null,
+            "items": [
+              {
+                "path": "/external",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": null,
+                "skip": 1,
+                "param": null,
+                "subs": {
+                  "func": null,
+                  "items": [
+                    {
+                      "path": "/search",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": "externalBusinessesSearch",
+                      "skip": null,
+                      "param": null
+                    },
+                    {
+                      "path": "/info",
+                      "method": null,
+                      "status": "success",
+                      "response": 200,
+                      "func": null,
+                      "skip": 1,
+                      "param": ["id"],
+                      "subs": {
+                        "func": null,
+                        "items": [
+                          {
+                            "path": "/<id>",
+                            "method": null,
+                            "status": "success",
+                            "response": 200,
+                            "func": "externalBusinessesInfo",
+                            "skip": null,
+                            "param": null
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
               }
             ]
           }

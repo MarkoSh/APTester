@@ -105,12 +105,16 @@ class Tester():
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
             with Profiler() as p:
-                if func == 'checkStatus':
-                    self.checkStatus(path=path)
-                if func == 'testUser':
-                    self.testUser(path=path)
-                if func == 'authUser':
-                    self.authUser(path=path)
+                # if func == 'checkStatus':
+                #     self.checkStatus(path=path)
+                # if func == 'testUser':
+                #     self.testUser(path=path)
+                # if func == 'authUser':
+                #     self.authUser(path=path)
+                if func == 'externalBusinessesSearch':
+                    self.externalBusinessesSearch(path=path)
+                # if func == 'externalBusinessesInfo':
+                #     self.externalBusinessesInfo(path=path)
                 # if func == 'testLocation':
                 #     self.testLocation(path=path)
                 # if func == 'getStats':
@@ -127,6 +131,14 @@ class Tester():
                 #     self.createCustomer(path=path)
                 # if func == 'searchBusiness':
                 #     self.searchBusiness(path=path)
+
+    def externalBusinessesInfo(self, path):
+        #TODO сделать же
+        pass
+
+    def externalBusinessesSearch(self, path):
+        #TODO сделать же
+        pass
 
     def searchBusiness(self, path):
         #TODO оказывается это не тот поиск (
@@ -150,6 +162,7 @@ class Tester():
                                     if data['data']['city'] is not None:
                                         self.log.success('Zip to location success, location is {}'.format(data['data']))
                                         data_ = data['data']
+                                        #TODO сделать подстановку ключей
                                         link = '{}?q={}&lat={}&lng={}&location={}, {}'.format(link, 'library', data_['lat'], data_['lng'], data_['city'], data_['state'])
                                         req_ = requests.get(url=link)
                                         data__ = req_.json()
