@@ -115,10 +115,10 @@ class Tester():
                 #     self.testLocation(path=path)
                 # if func == 'getStats':
                 #     self.getStats(path=path)
-                # if func == 'sendMessage':
-                #     self.sendMessage(path=path)
-                # if func == 'getMessages':
-                #     self.getMessages(path=path)
+                if func == 'sendMessage':
+                    self.sendMessage(path=path)
+                if func == 'getMessages':
+                    self.getMessages(path=path)
                 if func == "readConversation":
                     self.readConversation(path=path)
                 # if func == 'ziptoloc':
@@ -325,6 +325,7 @@ class Tester():
         for user in self.users:
             with Profiler() as p:
                 link_ = '{}?user_id={}'.format(link, user['key']['id'])
+                self.log.info('Conversations link {}'.format(link_))
                 try:
                     req = requests.get(url=link_)
                     if req.status_code == path['response']:
@@ -336,6 +337,8 @@ class Tester():
                                     self.log.success('Found {} conversations for user {}'.format(len(conversatons), user['key']['id']))
                                     for conversaton in conversatons:
                                         self.log.success('Conversation id {}'.format(conversaton['conversation_id']))
+                                else:
+                                    self.log.info('No conversations for user {}'.format(user['key']['id']))
                             else:
                                 self.log.error('Request failed')
                                 exit()
@@ -352,6 +355,7 @@ class Tester():
     def readConversation(self, path):
         link = '{}{}'.format(self.host, path['path'])
         self.log.info('Requesting conversation...')
+        random.shuffle(self.users)
         for user in self.users:
             with Profiler() as p:
                 link_ = '{}/v2/user/messages?user_id={}'.format(self.host, user['key']['id'])
@@ -380,8 +384,8 @@ class Tester():
                                         else:
                                             self.log.error('Request failed')
                                             exit()
-
-                                    break
+                                else:
+                                    self.log.info('No conversations for user {}'.format(user['key']['id']))
                             else:
                                 self.log.error('Request failed')
                                 exit()

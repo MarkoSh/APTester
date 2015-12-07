@@ -40,15 +40,6 @@
                 "param": null
               },
               {
-                "path": "/conversation",
-                "method": null,
-                "status": "success",
-                "response": 200,
-                "func": "readConversation",
-                "skip": null,
-                "param": ["thread_id"]
-              },
-              {
                 "path": "/location",
                 "method": null,
                 "status": "success",
@@ -57,6 +48,7 @@
                 "skip": null,
                 "param": null
               },
+
               {
                 "path": "/message",
                 "method": "POST",
@@ -74,6 +66,15 @@
                 "func": "getMessages",
                 "skip": null,
                 "param": null
+              },
+              {
+                "path": "/conversation",
+                "method": null,
+                "status": "success",
+                "response": 200,
+                "func": "readConversation",
+                "skip": null,
+                "param": ["thread_id"]
               }
             ]
           }
