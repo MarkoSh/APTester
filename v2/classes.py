@@ -137,8 +137,42 @@ class Tester():
         pass
 
     def externalBusinessesSearch(self, path):
-        #TODO сделать же
-        pass
+        link = '{}{}'.format(self.host, path['path'])
+        with open('businesskeys.txt', 'r') as b_fp, open('cities.txt', 'r') as c_fp:
+            businesskeys = [businesskey.strip() for businesskey in b_fp.readlines()]
+            random.shuffle(businesskeys)
+            cities = [city.strip() for city in c_fp.readlines()]
+            random.shuffle(cities)
+            for key in businesskeys[0:10]:
+                for city in cities[0:10]:
+                    with Profiler() as p:
+                        link_ = '{}?q={}&location={}'.format(link, key, city)
+                        self.log.info('Source google, {}'.format(link_))
+                        try:
+                            req = requests.get(url=link)
+                            try:
+                                data = req.json()
+                                pass
+                            except ValueError as e:
+                                self.log.error('Getting JSON object failed with error {}'.format(e))
+                                exit()
+                        except ConnectionError as e:
+                            self.log.error('Request failed with error {}'.format(e))
+                            exit()
+                        link_ = '{}?q={}&location={}&source=yelp'.format(link, key, city)
+                        self.log.info('Source yelp, {}'.format(link_))
+                        try:
+                            req = requests.get(url=link)
+                            try:
+                                data = req.json()
+                                pass
+                            except ValueError as e:
+                                self.log.error('Getting JSON object failed with error {}'.format(e))
+                                exit()
+                        except ConnectionError as e:
+                            self.log.error('Request failed with error {}'.format(e))
+                            exit()
+
 
     def searchBusiness(self, path):
         #TODO оказывается это не тот поиск (
