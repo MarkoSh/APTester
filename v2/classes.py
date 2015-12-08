@@ -2,9 +2,8 @@
 
 __author__ = 'mark'
 
-import requests, json, random
+import requests, json, random, urllib, hashlib
 from logger import Logger, Profiler
-import hashlib
 from requests.exceptions import ConnectionError
 
 
@@ -143,31 +142,56 @@ class Tester():
             random.shuffle(businesskeys)
             cities = [city.strip() for city in c_fp.readlines()]
             random.shuffle(cities)
-            for key in businesskeys[0:10]:
-                for city in cities[0:10]:
+            for key in businesskeys[0:2]:
+                for city in cities[0:2]:
                     with Profiler() as p:
-                        link_ = '{}?q={}&location={}'.format(link, key, city)
+                        params = urllib.urlencode({'q': key, 'location': city})
+                        link_ = '{}?{}'.format(link, params)
                         self.log.info('Source google, {}'.format(link_))
                         try:
-                            req = requests.get(url=link)
-                            try:
-                                data = req.json()
-                                pass
-                            except ValueError as e:
-                                self.log.error('Getting JSON object failed with error {}'.format(e))
+                            req = requests.get(url=link_)
+                            if req.status_code == path['response']:
+                                try:
+                                    data = req.json()
+                                    if data['status'] == 'success' and len(data['data']):
+                                        self.log.success('Found {} results'.format(len(data['data']['results'])))
+                                        for result in data['data']['results']:
+                                            if result['source'] != 'google':
+                                                self.log.error('Unexpected source {}'.format(result['source']))
+                                                exit()
+                                    else:
+                                        self.log.error('Request failed')
+                                        exit()
+                                except ValueError as e:
+                                    self.log.error('Getting JSON object failed with error {}'.format(e))
+                                    exit()
+                            else:
+                                self.log.error('Request failed')
                                 exit()
                         except ConnectionError as e:
                             self.log.error('Request failed with error {}'.format(e))
                             exit()
-                        link_ = '{}?q={}&location={}&source=yelp'.format(link, key, city)
+                        link_ = '{}?{}&source=yelp'.format(link, params, city)
                         self.log.info('Source yelp, {}'.format(link_))
                         try:
-                            req = requests.get(url=link)
-                            try:
-                                data = req.json()
-                                pass
-                            except ValueError as e:
-                                self.log.error('Getting JSON object failed with error {}'.format(e))
+                            req = requests.get(url=link_)
+                            if req.status_code == path['response']:
+                                try:
+                                    data = req.json()
+                                    if data['status'] == 'success' and len(data['data']):
+                                        self.log.success('Found {} results'.format(len(data['data']['results'])))
+                                        for result in data['data']['results']:
+                                            if result['source'] != 'yelp':
+                                                self.log.error('Unexpected source {}'.format(result['source']))
+                                                exit()
+                                    else:
+                                        self.log.error('Request failed')
+                                        exit()
+                                except ValueError as e:
+                                    self.log.error('Getting JSON object failed with error {}'.format(e))
+                                    exit()
+                            else:
+                                self.log.error('Request failed')
                                 exit()
                         except ConnectionError as e:
                             self.log.error('Request failed with error {}'.format(e))
