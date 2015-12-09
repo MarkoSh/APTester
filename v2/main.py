@@ -9,12 +9,22 @@ class Parser(ApiRequestHandler):
     reviews = {}
 
     def get(self):
-        url = self.request.get('url').strip()
-        nofollow = self.request.get('nofollow').strip()
-        fromts = self.request.get('fromts').strip()
+        url = None
+
+        if len(self.request.get('url').strip()):
+            url = self.request.get('url').strip()
+
+        nofollow = None
+        if len(self.request.get('nofollow').strip()):
+            nofollow = self.request.get('nofollow').strip()
+
+        fromts = None
+        if len(self.request.get('fromts').strip()):
+            fromts = int(float(self.request.get('fromts').strip()))
+
         self.followPagination(url, nofollow, fromts)
 
-    def followPagination(self, url, nofollow, fromts):
+    def followPagination(self, url, nofollow=None, fromts=None):
         try:
             self.log.info('Getting url {}...'.format(url))
             res = urlfetch.fetch(url)
@@ -51,7 +61,7 @@ class Parser(ApiRequestHandler):
                             excerpt = excerpt.text_content()
 
 
-                        if len(fromts) and fromts > date:
+                        if fromts is None and fromts > date:
                             continue
 
                         self.reviews[review_id] = {
@@ -64,9 +74,9 @@ class Parser(ApiRequestHandler):
 
                 self.log.info('Got url {}'.format(url))
                 next_page_url = parsed.find_class('page-option prev-next next')
-                if next_page_url is not None and len(next_page_url) and nofollow == 'yes':
+                if next_page_url is not None and len(next_page_url) and nofollow is None:
                     next_page_url = next_page_url[0].get('href')
-                    self.followPagination(next_page_url)
+                    self.followPagination(next_page_url, nofollow, fromts)
                 else:
                     return self.render_api_json(obj=self.reviews.values())
 
