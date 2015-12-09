@@ -10,9 +10,11 @@ class Parser(ApiRequestHandler):
 
     def get(self):
         url = self.request.get('url').strip()
-        self.followPagination(url)
+        nofollow = self.request.get('nofollow').strip()
+        fromts = self.request.get('fromts').strip()
+        self.followPagination(url, nofollow, fromts)
 
-    def followPagination(self, url):
+    def followPagination(self, url, nofollow, fromts):
         try:
             self.log.info('Getting url {}...'.format(url))
             res = urlfetch.fetch(url)
@@ -42,22 +44,27 @@ class Parser(ApiRequestHandler):
                         date = review_div.find_class('rating-qualifier')[0].find('meta')
                         if date.get('itemprop') == 'datePublished':
                             date = date.get('content')
+                            date = time.mktime(time.strptime(date, "%Y-%m-%d"))
 
                         excerpt = review_div.find_class('review-content')[0].find('p')
                         if excerpt.get('itemprop') == 'description':
                             excerpt = excerpt.text_content()
 
+
+                        if len(fromts) and fromts > date:
+                            continue
+
                         self.reviews[review_id] = {
                             'user': user,
                             'rating': rating,
                             'excerpt': excerpt,
-                            'time_created': time.mktime(time.strptime(date, "%Y-%m-%d")),
+                            'time_created': date,
                             'id': review_id
                         }
 
                 self.log.info('Got url {}'.format(url))
                 next_page_url = parsed.find_class('page-option prev-next next')
-                if next_page_url is not None and len(next_page_url):
+                if next_page_url is not None and len(next_page_url) and nofollow == 'yes':
                     next_page_url = next_page_url[0].get('href')
                     self.followPagination(next_page_url)
                 else:
