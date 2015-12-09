@@ -10,7 +10,6 @@ class Parser(ApiRequestHandler):
 
     def get(self):
         url = None
-
         if len(self.request.get('url').strip()):
             url = self.request.get('url').strip()
 
@@ -59,7 +58,6 @@ class Parser(ApiRequestHandler):
                         excerpt = review_div.find_class('review-content')[0].find('p')
                         if excerpt.get('itemprop') == 'description':
                             excerpt = excerpt.text_content()
-
 
                         if fromts is None and fromts > date:
                             continue
