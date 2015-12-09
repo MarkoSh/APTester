@@ -59,7 +59,7 @@ class Parser(ApiRequestHandler):
                         if excerpt.get('itemprop') == 'description':
                             excerpt = excerpt.text_content()
 
-                        if fromts is None and fromts > date:
+                        if fromts is not None and fromts > date:
                             continue
 
                         self.reviews[review_id] = {
