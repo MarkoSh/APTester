@@ -6,6 +6,9 @@ import requests, json, random, urllib, hashlib
 from logger import Logger, Profiler
 from requests.exceptions import ConnectionError
 
+from multiprocessing import Pool
+from multiprocessing.dummy import Pool as ThreadPool, Event
+import multiprocessing
 
 class Tester():
     def __init__(self, host='http://localhost:8080'):
@@ -27,55 +30,73 @@ class Tester():
             self.log.error('Request failed with error {}'.format(e))
             exit()
 
-    def createDemo(self):
-        ## Creating users
-        for i in range(0, 20):
+    def createUser(self, postData):
+        event = postData['event']
+        del postData['event']
+        if not event.is_set():
             with Profiler() as p:
-                string = hashlib.sha224()
-                string.update('{}'.format(random.random()))
-                first = 'first{}'.format(string.hexdigest()[0:10])
-                string.update('{}'.format(random.random()))
-                last = 'last{}'.format(string.hexdigest()[0:10])
-                tel = '{}'.format(8005550000 + i)
-                email = 'email{}@localhost.email'.format(string.hexdigest()[0:10])
-                postData = {
-                        'first': first,
-                        'last': last,
-                        'tel': tel,
-                        'email': email,
-                        'pass': 'password',
-                        'type': 'customer',
-                    }
                 try:
                     req = requests.post(url='{}{}'.format(self.host, '/v2/user/register'), data=postData)
                     if req.status_code == requests.codes.ok:
                         try:
                             data = req.json()
                             user = data['data']
-                            if first == user['first_name'] and \
-                                            last == user['last_name'] and \
-                                            tel == str(user['phone_number']) and \
-                                            email == user['email']:
-                                self.log.success('Adding user {} success, message {}'.format(email, data['message']))
+                            if postData['first'] == user['first_name'] and \
+                                            postData['last'] == user['last_name'] and \
+                                            postData['tel'] == str(user['phone_number']) and \
+                                            postData['email'] == user['email']:
+                                self.log.success('Adding user {} success, message {}'.format(postData['email'], data['message']))
+                                event.set()
                             else:
                                 self.log.error('Adding user failed')
                                 self.log.error('Posted data: {}'.format(postData))
                                 self.log.error('Received data: {}'.format(user))
-                                exit()
+                                event.set()
                         except ValueError as e:
                             self.log.error('Getting JSON object failed with error {}'.format(e))
-                            exit()
+                            event.set()
                     else:
                         try:
                             data = req.json()
-                            self.log.error('Adding user {} failed, message {}'.format(email, data['message']))
+                            self.log.error('Adding user {} failed, message {}'.format(postData['email'], data['message']))
                             # exit()
                         except ValueError as e:
                             self.log.error('Getting JSON object failed with error {}'.format(e))
-                            exit()
+                            event.set()
                 except ConnectionError as e:
                     self.log.error('Request failed with error {}'.format(e))
-                    exit()
+                    event.set()
+
+    def createDemo(self):
+
+        usersData = []
+        event = Event()
+        pool = ThreadPool(multiprocessing.cpu_count() * 2)
+
+        for i in range(0, 1):
+            string = hashlib.sha224()
+            string.update('{}'.format(random.random()))
+            first = 'first{}'.format(string.hexdigest()[0:10])
+            string.update('{}'.format(random.random()))
+            last = 'last{}'.format(string.hexdigest()[0:10])
+            tel = '{}'.format(8005550000 + i)
+            email = 'email{}@localhost.email'.format(string.hexdigest()[0:10])
+            postData = {
+                    'first': first,
+                    'last': last,
+                    'tel': tel,
+                    'email': email,
+                    'pass': 'password',
+                    'type': 'customer',
+                    'event': event,
+                    'pool': pool
+                }
+            usersData.append(postData)
+
+
+        results = pool.map(self.createUser, usersData)
+        pool.close()
+        pool.terminate()
 
     def startTest(self, paths):
         for path in paths:
@@ -104,14 +125,14 @@ class Tester():
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
             with Profiler() as p:
-                # if func == 'checkStatus':
-                #     self.checkStatus(path=path)
+                if func == 'checkStatus':
+                    self.checkStatus(path=path)
                 # if func == 'testUser':
                 #     self.testUser(path=path)
                 # if func == 'authUser':
                 #     self.authUser(path=path)
-                if func == 'externalBusinessesSearch':
-                    self.externalBusinessesSearch(path=path)
+                # if func == 'externalBusinessesSearch':
+                #     self.externalBusinessesSearch(path=path)
                 # if func == 'externalBusinessesInfo':
                 #     self.externalBusinessesInfo(path=path)
                 # if func == 'testLocation':

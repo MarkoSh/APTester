@@ -20,23 +20,23 @@ class Logger():
 
     timeformat = '%Y-%m-%d %H:%M:%S'
     def info(self, msg='Information'):
-        line = 'INFORMATION: {} - {}'.format(datetime.now().strftime(self.timeformat), msg)
+        line = 'INFORMATION: {} - {}\n'.format(datetime.now().strftime(self.timeformat), msg)
         print(colors.yellow(line))
         self.write_('log', line)
 
     def success(self, msg='Success'):
-        line = 'SUCCESS: {} - {}'.format(datetime.now().strftime(self.timeformat), msg)
+        line = 'SUCCESS: {} - {}\n'.format(datetime.now().strftime(self.timeformat), msg)
         print(colors.green(line))
         self.write_('log', line)
 
     def error(self, msg='Error'):
-        line = 'ERROR: {} - {}'.format(datetime.now().strftime(self.timeformat), msg)
+        line = 'ERROR: {} - {}\n'.format(datetime.now().strftime(self.timeformat), msg)
         print(colors.red(line))
         self.write_('error', line)
         self.write_('log', line)
 
     def separator(self):
-        line = '---------------------------------------------------------------'
+        line = '---------------------------------------------------------------\n'
         print(colors.blue(line))
 
     def write_(self, type, line):
