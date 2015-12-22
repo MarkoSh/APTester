@@ -11,7 +11,7 @@ from multiprocessing.dummy import Pool as ThreadPool, Event
 import multiprocessing
 
 class Tester():
-    def __init__(self, host='http://localhost:8080'):
+    def __init__(self, host='http://localhost:8081'):
         self.host = host
         self.log = Logger()
         try:
@@ -46,7 +46,6 @@ class Tester():
                                             postData['tel'] == str(user['phone_number']) and \
                                             postData['email'] == user['email']:
                                 self.log.success('Adding user {} success, message {}'.format(postData['email'], data['message']))
-                                event.set()
                             else:
                                 self.log.error('Adding user failed')
                                 self.log.error('Posted data: {}'.format(postData))
@@ -73,7 +72,7 @@ class Tester():
         event = Event()
         pool = ThreadPool(multiprocessing.cpu_count() * 2)
 
-        for i in range(0, 1):
+        for i in range(0, 1000):
             string = hashlib.sha224()
             string.update('{}'.format(random.random()))
             first = 'first{}'.format(string.hexdigest()[0:10])
@@ -88,15 +87,14 @@ class Tester():
                     'email': email,
                     'pass': 'password',
                     'type': 'customer',
-                    'event': event,
-                    'pool': pool
+                    'event': event
                 }
             usersData.append(postData)
 
 
         results = pool.map(self.createUser, usersData)
         pool.close()
-        pool.terminate()
+        pool.join()
 
     def startTest(self, paths):
         for path in paths:
@@ -125,8 +123,8 @@ class Tester():
             link = '{}{}'.format(self.host, path['path'])
             self.log.info('{}, function: {}'.format(link, path['func']))
             with Profiler() as p:
-                if func == 'checkStatus':
-                    self.checkStatus(path=path)
+                # if func == 'checkStatus':
+                #     self.checkStatus(path=path)
                 # if func == 'testUser':
                 #     self.testUser(path=path)
                 # if func == 'authUser':
@@ -143,8 +141,8 @@ class Tester():
                 #     self.sendMessage(path=path)
                 # if func == 'getMessages':
                 #     self.getMessages(path=path)
-                # if func == "readConversation":
-                #     self.readConversation(path=path)
+                if func == "readConversation":
+                    self.readConversation(path=path)
                 # if func == 'ziptoloc':
                 #     self.ziptoloc(path=path)
                 # if func == 'createCustomer':
@@ -326,9 +324,9 @@ class Tester():
             'deliver_to_email',
             'deliver_to_voice'
         ]
-        ### Коректная отправка с исключение самого отправителя из списка
+        ### Коректная отправка с исключением самого отправителя из списка
         self.log.info('Correct receivers sending...')
-        for i in range(0, 3):
+        for i in range(0, 500):
             user_from = self.users[i]['key']['id']
             self.users.pop(i)
             users_to = list()
@@ -549,7 +547,7 @@ class Tester():
 
     def authUser(self, path):
         random.shuffle(self.users)
-        for i in range(0, 10):
+        for i in range(0, 500):
             with Profiler() as p:
                 user = self.users[i]
                 link = '{}{}'.format(self.host, path['path'])
@@ -589,7 +587,7 @@ class Tester():
 
     def testUser(self, path):
         random.shuffle(self.users)
-        for i in range(0, 3):
+        for i in range(0, 500):
             with Profiler() as p:
                 user = self.users[i]
                 link = '{}{}'.format(self.host, path['path'].replace('<user_id:\\d+>', str(user['key']['id'])))

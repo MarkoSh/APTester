@@ -43,7 +43,7 @@ with open('paths.json', 'r') as fp, Profiler() as p:
     log.info('Starting tests...')
     paths = json.load(fp)
     tester = Tester()
-    tester.createDemo()
-    # tester.startTest(paths)
+    # tester.createDemo()
+    tester.startTest(paths)
     log.info('End tests')
 
