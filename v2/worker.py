@@ -2,9 +2,12 @@
 
 __author__ = 'mark'
 
-import json, sys
-from classes import Tester
-from logger import Profiler, Logger
+import json
+import sys
+
+from v2.TestClasses.classes import Tester
+from v2.TestClasses.logger  import Profiler, Logger
+
 
 params = sys.argv
 ownparams = {

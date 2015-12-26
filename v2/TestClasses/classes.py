@@ -3,7 +3,7 @@
 __author__ = 'mark'
 
 import requests, json, random, urllib, hashlib
-from logger import Logger, Profiler
+from .logger import Logger, Profiler
 from requests.exceptions import ConnectionError
 
 from multiprocessing import Pool
@@ -127,8 +127,8 @@ class Tester():
                 #     self.checkStatus(path=path)
                 # if func == 'testUser':
                 #     self.testUser(path=path)
-                # if func == 'authUser':
-                #     self.authUser(path=path)
+                if func == 'authUsers':
+                    self.authUsers(path=path)
                 # if func == 'externalBusinessesSearch':
                 #     self.externalBusinessesSearch(path=path)
                 # if func == 'externalBusinessesInfo':
@@ -141,8 +141,8 @@ class Tester():
                 #     self.sendMessage(path=path)
                 # if func == 'getMessages':
                 #     self.getMessages(path=path)
-                if func == "readConversation":
-                    self.readConversation(path=path)
+                # if func == "readConversation":
+                #     self.readConversation(path=path)
                 # if func == 'ziptoloc':
                 #     self.ziptoloc(path=path)
                 # if func == 'createCustomer':
@@ -545,18 +545,20 @@ class Tester():
                         self.log.error('Request failed with error {}'.format(e))
                         exit()
 
-    def authUser(self, path):
-        random.shuffle(self.users)
+    def authUsers(self, path):
+        # random.shuffle(self.users)
         for i in range(0, 500):
             with Profiler() as p:
                 user = self.users[i]
                 link = '{}{}'.format(self.host, path['path'])
                 try:
+                    self.log.info('User num: {}'.format(i))
                     self.log.info('Authenticate user {}, {}...'.format(user['email'], link))
-                    req = requests.post(url=link, data={
+                    postData = {
                         'user_id': user['email'],
                         'password': 'password'
-                    })
+                    }
+                    req = requests.post(url=link, data=postData)
                     if req.status_code == path['response']:
                         self.log.info('Trying to get JSON object for user...')
                         try:

@@ -35,7 +35,7 @@
                 "method": null,
                 "status": "success",
                 "response": 200,
-                "func": "authUser",
+                "func": "authUsers",
                 "skip": null,
                 "param": null
               },
