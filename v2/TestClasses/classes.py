@@ -216,7 +216,6 @@ class Tester():
                             self.log.error('Request failed with error {}'.format(e))
                             exit()
 
-
     def searchBusiness(self, path):
         #TODO оказывается это не тот поиск (
         link = '{}{}'.format(self.host, path['path'])
