@@ -46,6 +46,7 @@ class Tester():
                                             postData['tel'] == str(user['phone_number']) and \
                                             postData['email'] == user['email']:
                                 self.log.success('Adding user {} success, message {}'.format(postData['email'], data['message']))
+                                # self.authUser(user['email'])
                             else:
                                 self.log.error('Adding user failed')
                                 self.log.error('Posted data: {}'.format(postData))
@@ -71,6 +72,7 @@ class Tester():
         usersData = []
         event = Event()
         pool = ThreadPool(multiprocessing.cpu_count() * 2)
+        pool = ThreadPool(5)
 
         for i in range(0, 1000):
             string = hashlib.sha224()
@@ -544,9 +546,47 @@ class Tester():
                         self.log.error('Request failed with error {}'.format(e))
                         exit()
 
+    def authUser(self, email):
+        with Profiler() as p:
+            link = '{}/v2/user/authenticate'.format(self.host)
+            try:
+                self.log.info('Authenticate user {}, {}...'.format(email, link))
+                postData = {
+                    'user_id': email,
+                    'password': 'password'
+                }
+                req = requests.post(url=link, data=postData)
+                if req.status_code == 200:
+                    self.log.info('Trying to get JSON object for user...')
+                    try:
+                        data = req.json()
+                        if data['status'] == 'success':
+                            user_ = data['data']
+                            if email == user_['email']:
+                                self.log.success('Received {}:{} equals expected {}:{}'.format('email', user_['email'], 'email', email))
+                            else:
+                                self.log.error('{}, message: {}'.format(link, data['message']))
+                                exit()
+                        else:
+                            self.log.error('{}, message: {}'.format(link, data['message']))
+                            exit()
+                    except ValueError as e:
+                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                        exit()
+                else:
+                    try:
+                        data = req.json()
+                        self.log.error('User {} login failed, message: {}'.format(email, data['message']))
+                    except ValueError as e:
+                        self.log.error('Getting JSON object failed with error {}'.format(e))
+                    exit()
+            except ConnectionError as e:
+                self.log.error('Request failed with error {}'.format(e))
+                exit()
+
     def authUsers(self, path):
         # random.shuffle(self.users)
-        for i in range(0, 500):
+        for i in range(0, int(len(self.users) / 2)):
             with Profiler() as p:
                 user = self.users[i]
                 link = '{}{}'.format(self.host, path['path'])
@@ -564,7 +604,7 @@ class Tester():
                             data = req.json()
                             if data['status'] == 'success':
                                 user_ = data['data']
-                                if user['email'] == user['email']:
+                                if user_['email'] == user['email']:
                                     self.log.success('Received {}:{} equals expected {}:{}'.format('email', user_['email'], 'email', user['email']))
                                 else:
                                     self.log.error('{}, message: {}'.format(link, data['message']))
