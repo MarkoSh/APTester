@@ -592,7 +592,7 @@ class Tester():
                 link = '{}{}'.format(self.host, path['path'])
                 try:
                     self.log.info('User num: {}'.format(i))
-                    self.log.info('Authenticate user {}, {}...'.format(user['email'], link))
+                    self.log.info('Authenticate user by {}, {}...'.format(user['email'], link))
                     postData = {
                         'user_id': user['email'],
                         'password': 'password'
@@ -606,6 +606,37 @@ class Tester():
                                 user_ = data['data']
                                 if user_['email'] == user['email']:
                                     self.log.success('Received {}:{} equals expected {}:{}'.format('email', user_['email'], 'email', user['email']))
+                                else:
+                                    self.log.error('{}, message: {}'.format(link, data['message']))
+                                    exit()
+                            else:
+                                self.log.error('{}, message: {}'.format(link, data['message']))
+                                exit()
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                            exit()
+                    else:
+                        try:
+                            data = req.json()
+                            self.log.error('User {} login failed, message: {}'.format(user['email'], data['message']))
+                        except ValueError as e:
+                            self.log.error('Getting JSON object failed with error {}'.format(e))
+                        exit()
+
+                    self.log.info('Authenticate user by {}, {}...'.format(user['phone_number'], link))
+                    postData = {
+                        'user_id': user['phone_number'],
+                        'password': 'password'
+                    }
+                    req = requests.post(url=link, data=postData)
+                    if req.status_code == path['response']:
+                        self.log.info('Trying to get JSON object for user...')
+                        try:
+                            data = req.json()
+                            if data['status'] == 'success':
+                                user_ = data['data']
+                                if user_['phone_number'] == user['phone_number']:
+                                    self.log.success('Received {}:{} equals expected {}:{}'.format('phone_number', user_['phone_number'], 'phone_number', user['phone_number']))
                                 else:
                                     self.log.error('{}, message: {}'.format(link, data['message']))
                                     exit()
